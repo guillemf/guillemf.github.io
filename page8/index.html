@@ -1,0 +1,737 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Guillem Fernandez</title>
+  <meta name="author" content="Guillem Fernandez">
+
+  
+  <meta name="description" content="This article is about how to move from this: “In order to avoid mistakes users must be able to calculate a sum. As example, starting on the Welcome &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.guillem.mobi/page8">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Guillem Fernandez" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-52623021-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><img src="/images/Logo64.png" height="64" width="64"/ id="header-logo"><a href="/">Guillem Fernandez</a></h1>
+  
+    <h2>About my job and my passion.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+  
+  
+<ul class="subscription">
+  <li><a href="http://delicious.com/guillemf" rel="subscribe-delicious" title="Delicious Bookmarks">Delicious</a></li>
+</ul>
+  
+  
+  
+<ul class="subscription">
+  <li><a href="https://github.com/guillemf" rel="subscribe-github" title="@guillemf on GitHub">GitHub</a></li>
+</ul>
+  
+  
+  
+<ul class="subscription">
+  <li><a href="https://bitbucket.org/guillemfg" rel="subscribe-bitbucket" title="@guillemfg on Bitbucket">Bitbucket</a></li>
+</ul>
+  
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.guillem.mobi" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/profile">About</a></li>
+  <li><a href="/porfolio">Porfolio</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/14/bdd-from-the-idea-to-the-app/">BDD - From the Idea to the App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-11-14T21:31:00+01:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>9:31 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This article is about how to move from this:</p>
+
+<p>“In order to avoid mistakes users must be able to calculate a sum. As example, starting on the Welcome Screen when I touch &ldquo;3&rdquo; and I touch &ldquo;+&rdquo; and I touch &ldquo;2&rdquo; and I touch &ldquo;=&rdquo; then I should see a &ldquo;5&rdquo; in the screen. When I touch &ldquo;4&rdquo; and I touch &ldquo;+&rdquo; and I touch &ldquo;2&rdquo; and I touch &ldquo;=&rdquo; then I should see a &ldquo;6&rdquo; in the screen.”</p>
+
+<p>To this:</p>
+
+<p><img src="http://farm9.staticflickr.com/8490/8186412084_9aa8b09095_b.jpg" alt="Simple Calculator Screen" /></p>
+
+<p>Using <a href="[Cucumber"><em>BDD</em></a> it provides you a simple, easy and fast mechanism to keep the communication between technical and non technical integrators of the project, you are going to understand how reading this article. The audience of this article is basically technical people that is constantly in contact with <em>Product Owners</em> or <em>Stackehodlers</em> that claims for functionalities, or in scrum terms <em>product histories</em> that they have clear in their minds but aren’t able to transmit in the a way that a technical person understand.</p>
+
+<p>Let’s go to a simple but clear example. An accountant wants to add a function to his calculator that enables him to put positive numbers un green, and negative numbers in red. Looks pretty simple, doesn’t it? &hellip; No! &hellip; we have a conflict here, because there is a case left to interpretation, what happens with zero?</p>
+
+<p>The answer comes from a little more elaborated requirement like:</p>
+
+<p>“If the number in the display is greater than zero then it’s colour should be green. If the number in the display is less that zero then it’s colour should be red”</p>
+
+<p>And then you can see a gap in this requirements so you can fix it adding:</p>
+
+<p>“If the number in the display is greater than zero then it’s colour should be green. If the number in the display is less <strong>or equal</strong> than zero then it’s colour should be red”</p>
+
+<p>And this is a sentence that both can understand and doesn’t leave space for interpretations. And better than this, is usable to develop an App.</p>
+
+<h2>Step 1: Let’s put things in context</h2>
+
+<p>To read more about <em>BDD</em> you have great resources like <a href="http://cukes.info">Cucumber - Making BDD fun</a> or books like <a href="http://shop.oreilly.com/product/9781934356807.do">The Cucumber Book</a>, but  I’m not going to explain what is <em>BDD</em> because it is outside the scope of this article. Instead of it, I’m going to focus <em>BDD</em> in a very practical way and centred in iOS.</p>
+
+<p>As a summary, we could say that Cucumber is a set of rules and procedures that, using a syntax called <em>Gherkin</em>, allows you to use requirements written in a ‘natural way’ to set acceptance tests. To do it, it uses a script that takes your <em>Features</em> and using a set of step definitions that you have to create, runs the tests on you App. It is probably best explained with an example.</p>
+
+<ol>
+<li>Run <em>cucumber</em> in your command line.</li>
+<li>Cucumber looks for your firs <em>Feature</em></li>
+<li>The Features says “I press ‘2’ “ in his first step</li>
+<li>Cucumber doesn’t know how to “Press ‘2’”</li>
+<li>Cucumber looks for step definition.</li>
+<li>The step definition says “Touch a number means to look for a button with that number on his label and start touch action”</li>
+<li>Cucumber performs the action.</li>
+</ol>
+
+
+<p>Of course the step definition is not created in natural language, but in Ruby. Don’t be scared about it, it’s very easy to learn the few Ruby rules you’ll need to define the steps.</p>
+
+<p>If you find something missing here you are right. There is a peace in this puzzle missing. How does cucumber communicate with iOS apps, Ruby applications, .Net applications or any other kind of application? is it universal? The answer is no, there are different Cucumber implementations for different OS and different programming languages. In this case I will use <a href="[AUTOMATED">Calabash</a>. The reasons why I decided to use Calabash are basically because the have great documentation, it’s got support for gestures and it’s implemented for iOS and Android so you can use the same features to run Android and iOS tests.</p>
+
+<h2>Step 2: Let’s set it up</h2>
+
+<p>To start using cucumber you have to have the script installed. To do it first of all, test your Ruby installation by opening your terminal and running <strong>ruby -v</strong>. You should see something like this.</p>
+
+<p><img src="http://farm9.staticflickr.com/8061/8186414074_2be28c064c_b.jpg" alt="Terminal running ruby -v command" /></p>
+
+<p>If you haven’t installed a newer version of ruby, in mountain lion you should see “ruby 1.8.7 (2012-02-08 patchlevel 358) [universal-darwin12.0].” instead of “ruby 1.9.3p194 &hellip;”. Calabash works with version 1.8.7, but if you are going to go further in BDD, I’d recommend to install <a href="https://rvm.io">rvm</a> and then instal a version 1.9.x so you can use all the new features of Ruby 1.9.</p>
+
+<p>Next is installing calabash. To do it simply run “sudo gem install calabash-cucumber” to install calabash. And that’s it &hellip; you’ve got it.</p>
+
+<blockquote><p>!!!IT IS VERY IMPORTANT THAT YOU HAVE Xcode Command Line Tools INSTALLED!!!!</p></blockquote>
+
+<p><img src="http://farm9.staticflickr.com/8060/8186413982_c973fb23ab_b.jpg" alt="Project creation screen" /></p>
+
+<p>Now let’s prepare out project to run tests. Go to Xcode (I’m running Xcode Version 4.5 (4G182) at this moment) and create a new <em>Single View Application</em> project.</p>
+
+<p><img src="http://farm9.staticflickr.com/8205/8186413828_26b26d6884_b.jpg" alt="Project creation screen" /></p>
+
+<p>Once you’ve got it, close Xcode to make some changes in the project. In your terminal, go to your project folder, where you see your .xcodeproj file, and run in the terminal “calabash-ios setup” to setup your iOS project and “calabash-ios gen” to generate a skeleton features folder for your tests.</p>
+
+<p><img src="http://farm9.staticflickr.com/8488/8186413650_bfe020c045_b.jpg" alt="Running calabash-ios setup" /></p>
+
+<p><img src="http://farm9.staticflickr.com/8063/8186413512_6dbe7b3254_b.jpg" alt="Running calabash-ios gen" /></p>
+
+<p>At this point we have our project ready to start <em>BDDing</em>. To test that everything went fine, just run from the command line the command “cucumber” and you should see how it tries to test the default feature.</p>
+
+<p>If you have any problem setting up your project, take a look at <a href="https://github.com/calabash/calabash-ios">Calabash iOS page</a> where you’ll find a tutorial to setup your project for using calabash in deep detail.</p>
+
+<h2>Step 3: Let’s start with BDD</h2>
+
+<p>First of all we have to take a look on the new structure we have in our project, the skeleton of cucumber. Let’s take a look on it.</p>
+
+<p><img src="http://farm9.staticflickr.com/8349/8186413230_c033f505e6_z.jpg" alt="Folders structure created" /></p>
+
+<ul>
+<li><strong>calabash.framework</strong> - We are not touch this folder as here is where the framework lives.</li>
+<li><strong>features</strong> - This is the folder where we’ll play our magic.
+
+<ul>
+<li><em>my_firts.feature</em> - This is a sample feature just to give us a clue about how to use it.</li>
+<li><strong>step_definitions</strong> - The folder where we’ll define the way the steps must be done.</li>
+<li><strong>support</strong> - Folder with support ruby files. We are not going to use it in this tutorial.</li>
+</ul>
+</li>
+<li><em>irb_ios4.sh</em> - This is a script to run irb with all calabash definitions to use with iOS 4. We won’t use it in this tutorial,, but just for you to know it’s a command line utility to run Ruby scripts interactively with test purposes.</li>
+<li><em>irb_ios5.sh</em> - The same as the previous one but for iOS 5.</li>
+</ul>
+
+
+<p>Let’s create our first feature then. Go to your favourite text editor and create a file named <em>sums.feature</em> and place it into your <strong>features</strong> folder.  A feature is a functionality you want to test. Each feature is composed by a different number of scenarios which are in essence simple behaviours related to the feature that can be tested atomically, and each scenario is formed by a number of steps where you can perform actions and check responses. The best way to understand it is by translating our requirement text into features.</p>
+
+<p>In the initial text we have to scenarios:</p>
+
+<ol>
+<li>starting on the Welcome Screen when I touch &ldquo;3&rdquo; and I touch &ldquo;+&rdquo; and I touch &ldquo;2&rdquo; and I touch &ldquo;=&rdquo; then I should see a &ldquo;5&rdquo; in the screen.</li>
+<li>When I touch &ldquo;4&rdquo; and I touch &ldquo;+&rdquo; and I touch &ldquo;2&rdquo; and I touch &ldquo;=&rdquo; then I should see a &ldquo;6&rdquo; in the screen.</li>
+</ol>
+
+
+<p>Let’s create the feature by removing all the unnecessary text and reordering it:</p>
+
+<pre>
+Feature: Sums 
+    In order to avoid mistakes users must be able to calculate a sum
+
+  Scenario: Sum 3+2 = 5
+    Given I am on the Welcome Screen
+    When I touch "3"
+    And I touch "+"
+    And I touch "2"
+    And I touch "="
+    Then I should see a "5" in the screen
+</pre>
+
+
+<p>You can see here some keywords like <em>Given</em>, <em>When</em>, <em>And</em> and <em>Then</em>. Internally they are ignored, but they are great to put it in a format that can be easily read by non technical persons. I wont go into detail about how to move from text 1 to Scenario <em>Sum 3+2 = 5</em> because it depends a lot on the case and has a lot of simple common sense.</p>
+
+<p>Ok, we save and try to run the tests typing “cucumber features/sums.feature” in the Terminal window to run only the feature we are working on and we get the following result.</p>
+
+<p><img src="http://farm9.staticflickr.com/8069/8186413094_9eeeed2fb6_b.jpg" alt="Test execution result" /></p>
+
+<p>Let’s analyse it. The firs message to analyse is:</p>
+
+<pre>
+  Unable to auto detect APP_BUNDLE_PATH.
+  Have you built your app for simulator?.
+  Searched dir: /XXXXXXXXX/Library/Developer/Xcode/DerivedData/SimpleCalc-gvyjencvuqnnzcfxfncxonfqupys/Build/Products
+  Please build your app from Xcode
+  You should build the -cal target.
+</pre>
+
+
+<p>This basically means that cucumber can’t find the <em>App</em> to run the tests. So let’s do what he suggests, open Xcode, select the target, in this case SimpleCalc-cal → iPhone 6.0 Simulator and build with ⌘B so we generate SimpleCalc-cal.app.</p>
+
+<p><img src="http://farm9.staticflickr.com/8340/8186412900_7c9b44a219.jpg" alt="Select SimpleCalc-cal target" /></p>
+
+<p>Now running again “cucumber features/sums.feature” the result is completely different. The iPhone simulator starts and our <em>App</em> is executed. If it doesn’t, check you have “Enable access for assitive devices” checked in System Preferences → Accessibility.</p>
+
+<p><img src="http://farm9.staticflickr.com/8349/8186412758_7970039eaa_b.jpg" alt="Enable access for assitive devices" /></p>
+
+<p>And the result should be something like this:</p>
+
+<pre>
+~/Development/Tests/Self/SimpleCalc ➜cucumber features/sums.feature 
+Feature: Sums
+  In order to avoid mistakes users must be able to calculate a sum
+
+  Scenario: Sum 3+2 = 5                   # features/sums.feature:4
+-------------------------------------
+Auto detected APP_BUNDLE_PATH:
+
+APP_BUNDLE_PATH=/XXXXX/Library/Developer/Xcode/DerivedData/SimpleCalc-gvyjencvuqnnzcfxfncxonfqupys/Build/Products/Debug-iphonesimulator/SimpleCalc-cal.app
+
+Please verify!
+If this is wrong please set it as APP_BUNDLE_PATH in features/support/launch.rb
+-------------------------------------
+Ping http://localhost:37265/...
+Fetch version http://localhost:37265/version...
+    Given I am on the Welcome Screen      # features/step_definitions/my_first_steps.rb:1
+    When I touch "3"                      # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+      playback failed because: query view marked:'3' found no views. Is accessibility enabled?
+       (RuntimeError)
+      features/sums.feature:6:in `When I touch "3"'
+    And I touch "+"                       # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    And I touch "2"                       # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    And I touch "="                       # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    Then I should see a "5" in the screen # features/sums.feature:12
+
+Failing Scenarios:
+cucumber features/sums.feature:4 # Scenario: Sum 3+2 = 5
+
+1 scenario (1 failed)
+8 steps (1 failed, 3 skipped, 3 undefined, 1 passed)
+0m4.563s
+
+You can implement step definitions for undefined steps with these snippets:
+
+Then /^I should see a "(.*?)" in the screen$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+</pre>
+
+
+<p>Here the colours are important as they are highlighting the first step that fails with red so there is no point in continuing with the scenario and the scenario is marked as failure. Analysing the error message:</p>
+
+<pre>
+    When I touch "3"                      # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+      playback failed because: query view marked:'3' found no views. Is accessibility enabled?
+       (RuntimeError)
+      features/sums.feature:6:in `When I touch "3"'
+</pre>
+
+
+<p>Cucumber tells us that he can’t find any “3” to touch, so we have to create those numbers. To do it, go to Xcode and in the Interface Builder make <em>ViewController.xib</em> look like this:</p>
+
+<p><img src="http://farm9.staticflickr.com/8062/8186412624_b5bff8ebbc_b.jpg" alt="Calculator view" /></p>
+
+<p>And then Clean (⇧⌘K) and Build (⌘B) and run again your test “cucumber features/sums.feature”.</p>
+
+<p><img src="http://farm9.staticflickr.com/8490/8186412518_1306244ddc_b.jpg" alt="First green in test" /></p>
+
+<p>Look, some green in our tests and we can see the <em>App</em> how buttons are being pressed. But there is still a problem, Calabash is telling us that it doesn’t know how to evaluate <strong>Then I should see a &ldquo;5&rdquo; in the screen</strong>, and here starts part of the great value of the framework, how it suggest how to implement the steps.</p>
+
+<pre>
+You can implement step definitions for undefined steps with these snippets:
+
+Then /^I should see a "(.*?)" in the screen$/ do |arg1|
+  pending # express the regexp above with the code you wish you had
+end
+
+</pre>
+
+
+<p>So let’s do it. Again with your favourite text editor, create <em>features/step_definitions/sums_steps.rb</em> file and paste inside it the step definition suggestion. Inside this function you need to determine what is see something in the screen, and this is where Ruby comes to scene, you can read in <a href="https://github.com/calabash/calabash-ios/wiki">Calabash Wiki</a> all the predefined steps and how to create new steps, and I’m not going to go deeper in this point on how to create those steps, I will probably do in following tutorials if there is demand on.</p>
+
+<p>To get what we want its enough with checking that there is a view called screen and that the value of the text in it is the number we pass as parameter. It can be done with the function check_element_exists. It gets a parameter that is the query to execute with the values needed. I’ll go deeper in following tutorials as I commented, but the result should be this:</p>
+
+<pre>
+Then /^I should see a "(.*?)" in the screen$/ do |arg1|
+  check_element_exists("view marked:'screen' text:'#{arg1}'")
+end
+</pre>
+
+
+<p>So the function returns true if the view selected exists.</p>
+
+<p>Saving and running the test you should get something like this:</p>
+
+<pre>
+~/Development/Tests/Self/SimpleCalc ➜cucumber features/sums.feature 
+Feature: Sums
+  In order to avoid mistakes users must be able to calculate a sum
+
+  Scenario: Sum 3+2 = 5                   # features/sums.feature:4
+-------------------------------------
+Auto detected APP_BUNDLE_PATH:
+
+APP_BUNDLE_PATH=/XXXXXX/Library/Developer/Xcode/DerivedData/SimpleCalc-gvyjencvuqnnzcfxfncxonfqupys/Build/Products/Debug-iphonesimulator/SimpleCalc-cal.app
+
+Please verify!
+If this is wrong please set it as APP_BUNDLE_PATH in features/support/launch.rb
+-------------------------------------
+Ping http://localhost:37265/...
+Fetch version http://localhost:37265/version...
+    Given I am on the Welcome Screen      # features/step_definitions/my_first_steps.rb:1
+    When I touch "3"                      # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    And I touch "+"                       # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    And I touch "2"                       # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    And I touch "="                       # calabash-cucumber-0.9.106/features/step_definitions/calabash_steps.rb:15
+    Then I should see a "5" in the screen # features/step_definitions/sums_steps.rb:1
+      No element found for query: view marked:'screen' text:'5' (RuntimeError)
+      ./features/step_definitions/sums_steps.rb:2:in `/^I should see a "(.*?)" in the screen$/'
+      features/sums.feature:10:in `Then I should see a "5" in the screen'
+
+Failing Scenarios:
+cucumber features/sums.feature:4 # Scenario: Sum 3+2 = 5
+
+1 scenario (1 failed)
+6 steps (1 failed, 5 passed)
+0m7.339s
+</pre>
+
+
+<p>But &hellip; why??? I don’t understand anything &hellip; I have my view and he knows which is screen &hellip; or not. And here it is where a huge benefit comes as a side effect from using BDD, <strong>accessibility</strong>, we will create a nice and accessible app because it is the only way Calabash can identify the views. So let’s do it, let’s put ‘screen’ as accessibility label in Xcode for the label we are going to use as screen.</p>
+
+<p><img src="http://farm9.staticflickr.com/8067/8186412364_670b9b4e15.jpg" alt="Set accessibility label as “screen”" /></p>
+
+<p>Don’t forget to Clean (⇧⌘K) and Build (⌘B) after each IB change to see the results in your tests.</p>
+
+<p>Still getting the same result? Let’s see why. We were looking for a <em>view marked:&lsquo;screen&rsquo; text:&lsquo;#{arg1}’</em>, in this case <em>view marked:&#8217;screen&rsquo; text:’5’</em>, and we don’t have it. So, let’s pass our first test, put a 5 as the text of the “screen” label, Clean (⇧⌘K) and Build (⌘B) and “cucumber features/sums.feature” and Voilà!!!!.</p>
+
+<p><img src="http://farm9.staticflickr.com/8198/8186412254_39a5f0c867_b.jpg" alt="First successful test" /></p>
+
+<p>I know, I know, this is by far the less flexible and effortless possible solution but, and I want to be very clear on this point, you have to consider that BDD gives you the option and encourages to do the less code development necessary to pass the tests. As you can imagine requirements may change with time, I would say for sure they will, and the more complicated your development is, the more effort will be required to change it and still be passing the rest of tests so, if putting a 5 in the label passes the test, that’s all you have to do.</p>
+
+<h2>Step 4: Go through all your features and scenarios to create your App</h2>
+
+<p>At this point after completing the three previous steps you are a BDD master, and probably want too have something more useful than an app that shows a 5 in the screen no matter which number you press. To do it, and following BDD what we will do is go back to our feature file and add a new requirement that was in the initial text. In this case adding a new requirement, as long as we are in the same feature it means to add a new scenario.</p>
+
+<p>Your <em>sums.feature</em> file should look like this:</p>
+
+<pre>
+Feature: Sums 
+  In order to avoid mistakes users must be able to calculate a sum
+
+  Scenario: Sum 3+2 = 5
+    Given I am on the Welcome Screen
+    When I touch "3"
+    And I touch "+"
+    And I touch "2"
+    And I touch "="
+    Then I should see a "5" in the screen
+
+  Scenario: Sum 4+5 = 9
+    Given I am on the Welcome Screen
+    When I touch "4"
+    And I touch "+"
+    And I touch "5"
+    And I touch "="
+    Then I should see a "9" in the screen
+</pre>
+
+
+<p>Of course you could have this from the beginning, but when starting with BDD it is a good practice to start adding tests one by one.</p>
+
+<p>And here it is where the cycle of BDD starts by adding a test, developing the solution and adding new tests, etc &hellip;</p>
+
+<p>You can download the source code from <a href="https://github.com/bytespotion/SimpleCalc">github</a> or from <a href="https://bitbucket.org/gfernandezg/simplecalc/overview">bitbucket</a>.</p>
+
+<p>To follow the steps you can use the commits:</p>
+
+<ul>
+<li>Step 1: git checkout 0c442d93</li>
+<li>Step 2: git chechout 164b669</li>
+<li>Step 3: git checkout 5f3c9920</li>
+</ul>
+
+
+<p>Any comments, please send me an email to <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#111;&#x3a;&#98;&#x6c;&#111;&#103;&#x40;&#103;&#x75;&#105;&#x6c;&#x6c;&#101;&#x6d;&#x66;&#x65;&#x72;&#x6e;&#97;&#x6e;&#100;&#101;&#x7a;&#46;&#x63;&#111;&#109;">&#98;&#108;&#x6f;&#x67;&#64;&#103;&#117;&#105;&#x6c;&#108;&#x65;&#x6d;&#102;&#x65;&#114;&#x6e;&#97;&#110;&#100;&#x65;&#x7a;&#x2e;&#99;&#111;&#x6d;</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/14/oauth-2/">OAuth 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-11-14T21:28:00+01:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>9:28 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>What is OAuth 2.0</h2>
+
+<p>Considering the environment in which we develop our applications, not taking advantage of all data and services that are offered by the most important technology and services companies in the world, could result in a loss of opportunities. For the same reason, the fact that there is such a variety of services, the average user ends registering himself multiple times in multiple services, so each time you request a service from a user to register and fill in the relevant data is an occasion on which that user may be lost, so ideally the user would give us a place to go to find this information easily.</p>
+
+<p>Services like Gmail, Facebook, Flickr, Twitter, etc &hellip; has available data and resources that can be interesting, but, how can we access them? As expected, ask a user to enter in our server or our <em>App</em> his data and  password of a third-party service, when we are newcomers, is not the most convincing.</p>
+
+<p>Initially each of these services created their own API acces authentication method, but this, as well as being a problem for developers, did not provide the necessary confidence between services and complicated the use of services.</p>
+
+<p>Finally they decided to adopt as standard OAuth to provide access to resources that provide each of these services.</p>
+
+<p>The OAuth enabled services can provide for example.</p>
+
+<ul>
+<li>Access to the data as contacts, posts, etc &hellip;</li>
+<li>Sharing of user activity in the service.</li>
+<li>Accessing data stored as documents, images, etc &hellip;</li>
+</ul>
+
+
+<p>Like many other resources, with the advantage that each of the resources provided separately may be enabled thereby controlling which of them to access and which not.</p>
+
+<p>OAuth system works, to say it in a simple way, opposite of how we are used to. The user usually provides the correct username-password to accesse all service without restrictions, since the service is unable to distinguish from where the access is being made (not always but in most of the cases). While using OAuth, we invite the application to request access to use only those resources that allow the user desires.</p>
+
+<p>The main advantages provided by this system are that, the sense of security is much higher because usernames and passwords of critical services are not stored by third party applications. The user has full control about which applications are allowed to use the resources of the service at any moment and he can revoke the access to it without affecting any other application. And finally that, changing the password of a service, does not affect the access of those third party applications.</p>
+
+<h2>How does OAuth work</h2>
+
+<p>Accessing an OAuth service depends on the way the app is accessing. It won’t use the same way to access from a client web application than from a server application or from a mobile app, but the essence is the same.</p>
+
+<p>The steps to follow in order are:</p>
+
+<ol>
+<li>Register the <em>App</em> in the with the service provider to get a <em>Client_id</em> and a <em>Client_secret</em>.</li>
+<li>During the registration in most of the services you have to specify the type of app you are going to call from, as the flow contains a call to a response <em>URL</em> that in case of mobile <em>Apps</em> won’t be possible.</li>
+<li>Once registered, your <em>App</em> can offer access to the user. To do it, the <em>App</em> connects via an embedded web view with the service provider page sending in the header the info that identifies the <em>App</em>, that is the <em>Client_id</em> , <em>Client_secret</em> and the services the <em>App</em> wants to acces.</li>
+<li>The user is asked by the service provider to sign in and grant access to the requested services.</li>
+<li>On success, instead of redirecting to a <em>URL</em> the service will provide in the <em>title</em> of the page the “acceptance code”.</li>
+<li>This code has to be the exchanged for a <em>Token</em> and a <em>Refresh Token</em> accessing service provided by the service provider adding again in the header of the call the parameters to obtain the <em>tokens</em>.</li>
+<li>You can obtain a <em>token</em> that never expires or a <em>toke</em> with a limit life time and a <em>refresh token</em> that must be used when the token expires to obtain a new pair.</li>
+</ol>
+
+
+<p>From this point it is just a question of requesting services from the service provider using the provided token.</p>
+
+<p>It all can seem a bit confusing. If you are not technical people, don’t worry, “How does OAuth work” is not for you. If you are and want to know more, I’ll post an implementation for Objective-C in the following days.</p>
+
+<p>I hope you’ve liked it and don’t forget to send me your comments though twitter or by email.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/11/13/open-weather-inception-deck/">Open Weather - Inception Deck</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-11-13T22:35:00+01:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>10:35 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul>
+<li>To give the community new material that can be freely distributed.</li>
+<li>To have a good time.</li>
+</ul>
+
+
+<h2>The elevator pitch</h2>
+
+<p><strong>For</strong> developers.<br>
+<strong>who</strong> are newbies or want to learn a new methodology.<br>
+<strong>the</strong> Open Weather App.<br>
+<strong>is an</strong> easy and complete example.<br>
+<strong>that</strong> implements an App that is able to look for the forecast of a selection of cities.<br>
+<strong>unlike</strong> the rest of the weather apps that are in the store.<br>
+<strong>our</strong> product is open source and can be built, changed and inspected.<br></p>
+
+<h2>Product box</h2>
+
+<p><img src="http://farm9.staticflickr.com/8197/8183456405_2e2e8383ca_b.jpg" title="Image of the product box" alt="product box" /></p>
+
+<h2>NOT list</h2>
+
+<p><strong>IN SCOPE</strong></p>
+
+<ul>
+<li>Select and deselect cities</li>
+<li>Remember selected cities</li>
+<li>Perform animations</li>
+</ul>
+
+
+<p><strong>OUT OF SCOPE</strong></p>
+
+<ul>
+<li>Add new cities</li>
+<li>Save forecast</li>
+</ul>
+
+
+<p><strong>UNRESOLVED</strong></p>
+
+<ul>
+<li>Reorder cities</li>
+</ul>
+
+
+<h2>Meet your neighbours</h2>
+
+<p>Just because in this case we are going to do this project alone, we don&rsquo;t have any neighbour, but this is the perfect situation where you&rsquo;d need to list all that people that is related to the project, near to you or that can do some work in the project that you don&rsquo;t know how to do or is not one of your skills.</p>
+
+<p>I would add here a designer (Don&rsquo;t forget that if you want a good product don&rsquo;t try to design it from your perspective of engineer), a translator if you want multiple localizations, maybe an accountant if there is some kind of financial calculations that your app have to do, etc &hellip;</p>
+
+<p>Here is the place to list all that people, with their contact data, their skills and, if you think is appropriated, their fares.</p>
+
+<p>In this group you could also add those meant to be recipients of the <em>App</em> as, in other situations they probably would like to say some words about the proposal, the design and the time estimations.</p>
+
+<h2>Show the solution</h2>
+
+<p>Because of the simplicity of this project, there is not many documents we need to create before starting, so I decided to add a general schema, and screens mockups.</p>
+
+<table>
+ <tr>
+  <td><img src="http://farm9.staticflickr.com/8210/8186344266_d36ddefa86.jpg" alt="Forecast screen"/></td>
+  <td><img src="http://farm9.staticflickr.com/8063/8186343978_ed52bb9a25.jpg" alt="City selection"/></td>
+ </tr>
+ <tr>
+  <td><img src="http://farm9.staticflickr.com/8490/8186344130_2db76a7485.jpg" alt="City help"/></td>
+  <td><img src="http://farm9.staticflickr.com/8489/8186344390_c6340a82f4.jpg" alt="Forecast help"/></td>
+ </tr>
+</table>
+
+
+<p>Screen flow schema</p>
+
+<p><img src="http://farm9.staticflickr.com/8197/8186343738_c44650d79d_z.jpg" title="P1 Screen Flow" alt="Inception Schema" /></p>
+
+<h2>Ask what keep us up at night</h2>
+
+<ul>
+<li>Changes in the service we decide to use to get the forecast.</li>
+<li>Excess of API calls that may collapse the service as it is a free service.</li>
+</ul>
+
+
+<h2>Size it up</h2>
+
+<p>As we have a project that is going to be published through a blog and a podcast, we are being a little tricky here as we are taking more time than what it should take.</p>
+
+<ul>
+<li>1st Delivery: Inception Deck</li>
+<li>2nd Delivery: Develop the model</li>
+<li>3rd Delivery: Develop the views</li>
+<li>4th Delivery: Develop the controller</li>
+<li>5th Delivery: Develop the animations</li>
+<li>6th Delivery: Build and upload to App Store</li>
+</ul>
+
+
+<p><a href="http://farm9.staticflickr.com/8197/8186343420_03b424e745_b.jpg" title="Time Line"> <img src="http://farm9.staticflickr.com/8197/8186343420_03b424e745_b.jpg" title="Time Line" alt="time line" /></a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/page9">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page7">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Guillem Fernandez -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'guillemfernandez';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

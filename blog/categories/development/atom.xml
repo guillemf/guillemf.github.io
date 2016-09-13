@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Development | Guillem Fernandez]]></title>
+  <link href="http://blog.guillem.mobi/blog/categories/development/atom.xml" rel="self"/>
+  <link href="http://blog.guillem.mobi/"/>
+  <updated>2016-09-12T18:21:23+02:00</updated>
+  <id>http://blog.guillem.mobi/</id>
+  <author>
+    <name><![CDATA[Guillem Fernandez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MFMailComposeViewController Nightmare]]></title>
+    <link href="http://blog.guillem.mobi/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare/"/>
+    <updated>2015-01-23T10:30:03+01:00</updated>
+    <id>http://blog.guillem.mobi/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve just gone through MFMailComposeViewController because I had a problem with the look&amp;feel of the Cancel and Save buttons on the mail compose dialog toolbar. They just looked too, how to say, transparent. The problem was that in the app I am working on I use appearance proxy. That seemed not to work with MFMailComposeViewController.</p>
+
+<!-- more -->
+
+
+<p>My first approach was to change those behavior that didn&rsquo;t fit in my needs. And the result was &hellip; nothing. It&rsquo;s like that doesn&rsquo;t apply to it if you are using a global setting. You can find many solutions thought the internet telling you to user setTintColor on the MFMailComposeViewController object you&rsquo;ve just created, and they will work if you don&rsquo;t use the appearance proxy at some point of your app initialization like:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[[</span><span class="bp">UIBarButtonItem</span> <span class="nl">appearanceWhenContainedIn</span><span class="p">:[</span><span class="bp">UINavigationBar</span> <span class="k">class</span><span class="p">],</span> <span class="nb">nil</span><span class="p">]</span> <span class="nl">setTitleTextAttributes</span><span class="p">:</span><span class="n">buttonAttributes</span> <span class="nl">forState</span><span class="p">:</span><span class="n">UIControlStateNormal</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[[</span><span class="bp">UINavigationBar</span> <span class="n">appearance</span><span class="p">]</span> <span class="nl">setTintColor</span><span class="p">:[</span><span class="bp">UIColor</span> <span class="n">redColor</span><span class="p">]];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>If you did it, forget about using:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="p">[</span><span class="n">mailViewController</span><span class="p">.</span><span class="n">navigationBar</span> <span class="nl">setTintColor</span><span class="p">:[</span><span class="bp">UIColor</span> <span class="n">redColor</span><span class="p">]];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="nb">self</span> <span class="nl">presentViewController</span><span class="p">:</span><span class="n">mailViewController</span> <span class="nl">animated</span><span class="p">:</span><span class="nb">YES</span> <span class="nl">completion</span><span class="p">:</span><span class="nb">nil</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>The result is going to be the same nothing I had.</p>
+
+<p>But the good new is that there is a solution. I know it&rsquo;s not the most elegant one but it works and you can save a lot of time investigating that I already invested. The solution is to change the global setting in the appearance proxy to match what you need and set it back to the original behavior when the dialog is dismissed.</p>
+
+<p>As you know there is not going to be any dialog with navigation bar while the mail composer is present, it is safe to change it. To revert the changes, you need to do it in <em>- (void)mailComposeController:(MFMailComposeViewController<em>)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError</em>)error</em>. I use a singleton to contain the configuration colors I need to restore the original look&amp;feel, if you don&rsquo;t have it, you need to implement a mechanism to do it or you&rsquo;ll have a coupled and dependent code.</p>
+
+<p>Thanks for reading and don&rsquo;t forget to share and follow me in twitter @guillemfg.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 7 and iOS 8 Living Together]]></title>
+    <link href="http://blog.guillem.mobi/blog/2015/01/20/ios-7-and-ios-8-living-together/"/>
+    <updated>2015-01-20T19:02:10+01:00</updated>
+    <id>http://blog.guillem.mobi/blog/2015/01/20/ios-7-and-ios-8-living-together</id>
+    <content type="html"><![CDATA[<p>This is the first post of 2015. I want to start it with a new category, Tips and Tricks. I&rsquo;ve found that in my daily work I am fixing many different small pieces of code that, in some cases, will be interesting for you, so I decided to share it in my blog.</p>
+
+<p>The firs one is how to include code that behaves differently when it&rsquo;s running on iOS 7 than when it&rsquo;s running on iOS 8, for example. I&rsquo;ve found two main different ways to do it.</p>
+
+<!-- more -->
+
+
+<h2>Check the responsiveness to a selector.</h2>
+
+<p>Most of the times, the problem comes because of a change in the signature of an API or the deprecation of the methods. In this case the easiest way is to check if the object responds to the given selector. Two examples are NSOperation and UIApplication.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="bp">NSOperation</span> <span class="o">*</span><span class="n">myOperation</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSOperation</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">([</span><span class="n">myOperation</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">setName</span><span class="p">)])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iOS 8 specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iOS 7 speficic code</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="bp">UIApplication</span> <span class="o">*</span><span class="n">app</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIApplication</span> <span class="n">sharedApplication</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="p">([</span><span class="n">app</span> <span class="nl">respondsToSelector</span><span class="p">:</span><span class="k">@selector</span><span class="p">(</span><span class="n">registerForRemoteNotifications</span><span class="p">)])</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iOS 8 specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iOS 7 speficic code</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<h2>Check the value of <em>NSFundationVersionNumber</em></h2>
+
+<p>The second option is using <em>NSFundationVersionNumber</em>. This option gives you the flexibility to behave differently not because of any restriction, but because functional requirements or just because you like it.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="k">if</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="n">NSFoundationVersionNumber_iOS_7_0</span><span class="p">){</span>
+</span><span class='line'>    <span class="c1">// iOS 7.0 specific code</span>
+</span><span class='line'><span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">floor</span><span class="p">(</span><span class="n">NSFoundationVersionNumber</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="n">NSFoundationVersionNumber_iOS_7_1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iOS 7.1 specific code</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// iOS 8.X specific code</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>You can use the defined constants:</p>
+
+<ul>
+<li>NSFoundationVersionNumber_iPhoneOS_2_0</li>
+<li>NSFoundationVersionNumber_iPhoneOS_2_1</li>
+<li>NSFoundationVersionNumber_iPhoneOS_2_2</li>
+<li>NSFoundationVersionNumber_iPhoneOS_3_0</li>
+<li>NSFoundationVersionNumber_iPhoneOS_3_1</li>
+<li>NSFoundationVersionNumber_iPhoneOS_3_2</li>
+<li>NSFoundationVersionNumber_iOS_4_0</li>
+<li>NSFoundationVersionNumber_iOS_4_1</li>
+<li>NSFoundationVersionNumber_iOS_4_2</li>
+<li>NSFoundationVersionNumber_iOS_4_3</li>
+<li>NSFoundationVersionNumber_iOS_5_0</li>
+<li>NSFoundationVersionNumber_iOS_5_1</li>
+<li>NSFoundationVersionNumber_iOS_6_0</li>
+<li>NSFoundationVersionNumber_iOS_6_1</li>
+<li>NSFoundationVersionNumber_iOS_7_0</li>
+<li>NSFoundationVersionNumber_iOS_7_1</li>
+</ul>
+
+
+<p>Also OS X has its own ones.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[BDD - Mastermind : Adding Calabash and Creating Our First Tests]]></title>
+    <link href="http://blog.guillem.mobi/blog/2014/11/20/bdd-mastermind-adding-calabash-and-creating-our-first-tests/"/>
+    <updated>2014-11-20T20:06:16+01:00</updated>
+    <id>http://blog.guillem.mobi/blog/2014/11/20/bdd-mastermind-adding-calabash-and-creating-our-first-tests</id>
+    <content type="html"><![CDATA[<p>This is the sixth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/11/10/bdd-mastermind-view-preparation/" title="BDD - Mastermind : View preparation">here</a>. If you just landed, better start on the <a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/" title="BDD: From the Idea to the App 2">first</a></p>
+
+<p>In this post is where we really start doing BDD, so get ready to enter to the new and exciting world of cucumber and behaviour driven development.</p>
+
+<!-- more -->
+
+
+<h1>Cucumber, What is it and How to use</h1>
+
+<p>In previous post I&rsquo;ve introduced the concept of cucumber, and in this post we are going to start with it. But first I&rsquo;d like to give you a brief introduction about cucumber and what is it.</p>
+
+<p>Cucumber is an set of tools that allows us to write tests in &ldquo;<em>natural language</em>&rdquo; that are readable by the computer and tell it what to test and how to test. Notice that I&rsquo;ve written &ldquo;<em>natural language</em>&rdquo; between quotes and in italics. That is because we should make a couple precissions here. First, the language is natural because it can be read as a natural language written story, but is not so natural in the sense that we can&rsquo;t write it as it comes, but we have to follow some conventions that describe the gherkin syntax. Second, the test, as said before, are not going to work out of the box. Eventhough there are some steps that work with no additional effort, most of the steps will need a definition from your side.</p>
+
+<p>You could say - &ldquo;<em>what&rsquo;s the point in writting the tests if we have to do another development job behind?</em>&rdquo;</p>
+
+<p>Well, the advantage you get from this is the ability to have clearer tests that can be mantained with lot less effort and that can be written, read and maintained by third party and non technical people.</p>
+
+<h1>Back to school, let&rsquo;s learn some syntax</h1>
+
+<p>A good definition of what is gerkhin is in <a href="https://pragprog.com/book/hwcuc/the-cucumber-book" title="The Pragmatic Bookshelf">The Cucumber Book: Behaviour-Driven Development for Testes and Developers</a>, an excellent book that I highly recomend you to read if you want to be a &ldquo;<em>Cucumber Master</em>&rdquo;.</p>
+
+<blockquote><p>&ldquo;<em>Gherkin gives us a lightweight structure for documenting examples of the behavior our stakeholders want, in a way that it can be easily understood both by the stakeholders and by Cucumber.</em>&rdquo;</p></blockquote>
+
+<p>Let&rsquo;s see an example:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf">Feature: Board behaviour</span>
+</span><span class='line'><span class="nf">  As a Player</span>
+</span><span class='line'><span class="nf">  </span><span class="k">I </span><span class="nf">want to see how the cells react to my taps as expected</span>
+</span><span class='line'><span class="nf">  So I can begin playing</span><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf">Scenario: Initial situation</span>
+</span><span class='line'><span class="nf">  </span><span class="k">Given </span><span class="nf">I am on the Initial Screen</span>
+</span><span class='line'><span class="nf">  </span><span class="k">Then </span><span class="nf">a new game should be ready</span><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf"></span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>You can see this peace of code is written in a way anyone could understand, well, anyone who speaks english. What about a non english speaker stake holder? Well, gherkin syntax can be written in 40 different languages. You can see a list of available languages by running cucumber gem as &lsquo;<em>cucumber &ndash;i18n help</em>&rsquo; and you&rsquo;ll be listed all available languages. At this moment, this is what my system shows.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+</pre></td><td class='code'><pre><code class='vctreestatus'><span class='line'>      | ar        | Arabic              | العربية           |
+</span><span class='line'>      | bg        | Bulgarian           | български         |
+</span><span class='line'>      | bm        | Malay               | Bahasa Melayu     |
+</span><span class='line'>      | ca        | Catalan             | català            |
+</span><span class='line'>      | cs        | Czech               | Česky             |
+</span><span class='line'>      | cy-GB     | Welsh               | Cymraeg           |
+</span><span class='line'>      | da        | Danish              | dansk             |
+</span><span class='line'>      | de        | German              | Deutsch           |
+</span><span class='line'>      | el        | Greek               | Ελληνικά          |
+</span><span class='line'>      | en        | English             | English           |
+</span><span class='line'>      | en-Scouse | Scouse              | Scouse            |
+</span><span class='line'>      | en-au     | Australian          | Australian        |
+</span><span class='line'>      | en-lol    | LOLCAT              | LOLCAT            |
+</span><span class='line'>      | en-old    | Old English         | Englisc           |
+</span><span class='line'>      | en-pirate | Pirate              | Pirate            |
+</span><span class='line'>      | en-tx     | Texan               | Texan             |
+</span><span class='line'>      | eo        | Esperanto           | Esperanto         |
+</span><span class='line'>      | es        | Spanish             | español           |
+</span><span class='line'>      | et        | Estonian            | eesti keel        |
+</span><span class='line'>      | fa        | Persian             | فارسی             |
+</span><span class='line'>      | fi        | Finnish             | suomi             |
+</span><span class='line'>      | fr        | French              | français          |
+</span><span class='line'>      | gl        | Galician            | galego            |
+</span><span class='line'>      | he        | Hebrew              | עברית             |
+</span><span class='line'>      | hi        | Hindi               | हिंदी               |
+</span><span class='line'>      | hr        | Croatian            | hrvatski          |
+</span><span class='line'>      | hu        | Hungarian           | magyar            |
+</span><span class='line'>      | id        | Indonesian          | Bahasa Indonesia  |
+</span><span class='line'>      | is        | Icelandic           | Íslenska          |
+</span><span class='line'>      | it        | Italian             | italiano          |
+</span><span class='line'>      | ja        | Japanese            | 日本語             |
+</span><span class='line'>      | kn        | Kannada             | ಕನ್ನಡ              |
+</span><span class='line'>      | ko        | Korean              | 한국어             |
+</span><span class='line'>      | lt        | Lithuanian          | lietuvių kalba    |
+</span><span class='line'>      | lu        | Luxemburgish        | Lëtzebuergesch    |
+</span><span class='line'>      | lv        | Latvian             | latviešu          |
+</span><span class='line'>      | nl        | Dutch               | Nederlands        |
+</span><span class='line'>      | no        | Norwegian           | norsk             |
+</span><span class='line'>      | pa        | Panjabi             | ਪੰਜਾਬੀ              |
+</span><span class='line'>      | pl        | Polish              | polski            |
+</span><span class='line'>      | pt        | Portuguese          | português         |
+</span><span class='line'>      | ro        | Romanian            | română            |
+</span><span class='line'>      | ru        | Russian             | русский           |
+</span><span class='line'>      | sk        | Slovak              | Slovensky         |
+</span><span class='line'>      | sr-Cyrl   | Serbian             | Српски            |
+</span><span class='line'>      | sr-Latn   | Serbian (Latin)     | Srpski (Latinica) |
+</span><span class='line'>      | sv        | Swedish             | Svenska           |
+</span><span class='line'>      | th        | Thai                | ไทย               |
+</span><span class='line'>      | tl        | Telugu              | తెలుగు             |
+</span><span class='line'>      | tr        | Turkish             | Türkçe            |
+</span><span class='line'>      | tt        | Tatar               | Татарча           |
+</span><span class='line'>      | uk        | Ukrainian           | Українська        |
+</span><span class='line'>      | uz        | Uzbek               | Узбекча           |
+</span><span class='line'>      | vi        | Vietnamese          | Tiếng Việt        |
+</span><span class='line'>      | zh-CN     | Chinese simplified  | 简体中文           |
+</span><span class='line'>      | zh-TW     | Chinese traditional | 繁體中文           |&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>So we could write the same peace of code we wrote before as.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf">Característica: Comportamiento del Tablero</span>
+</span><span class='line'><span class="nf">  Como jugador</span>
+</span><span class='line'><span class="nf">  Quiero saber como reaccionan las celdas a mis pulsaciones tal como esper</span>
+</span><span class='line'><span class="nf">  y así poder empezar a jugar</span><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf">Escenario: Situación inicial</span>
+</span><span class='line'><span class="nf">  </span><span class="k">Dado </span><span class="nf">que estoy en la pantalla inicial</span>
+</span><span class='line'><span class="nf">  </span><span class="k">Entonces </span><span class="nf">un nuevo juego debería estar listo</span><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf"></span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>And cucumber should be able to proceed the same way as when it was written in english. Of course the steps definitions won&rsquo;t be called the same or will do any translation, but we can map them.</p>
+
+<p>Gherkin is basically a set of keywords organised in a certain way and followed by sentences that might or might not contain parameters and have to be defined as steps.</p>
+
+<p>The keywords used by gherkin are:</p>
+
+<ul>
+<li>First level
+
+<ul>
+<li>Feature</li>
+<li>Background</li>
+<li>Scenario</li>
+</ul>
+</li>
+<li>Second level
+
+<ul>
+<li>Given</li>
+<li>When</li>
+<li>Then</li>
+<li>And</li>
+<li>But</li>
+<li>*</li>
+<li>Scenario Outline</li>
+<li>Examples</li>
+</ul>
+</li>
+</ul>
+
+
+<p>First level keywords are used to separate different tests and group them, while the second level ones are to define each step or provide data to test on. I won&rsquo;t go deeper on this as it is not the purpose of this port serie. As I commented before, if you really want to get more information go and buy the book <a href="https://pragprog.com/book/hwcuc/the-cucumber-book" title="The Pragmatic Bookshelf">The Cucumber Book: Behaviour-Driven Development for Testes and Developers</a>, it&rsquo;s at the high level Pragmatic Programmers always offer.</p>
+
+<h1>Talk is cheap. Show me the code</h1>
+
+<p>It all looks very nice, but, does it work? And how does that work?</p>
+
+<p>Well, let&rsquo;s start by writting our first feature.</p>
+
+<p>If you remember a previous post in this series called <a href="/blog/2014/09/25/bdd-mastermind-internal-design/" title="Previous post reference">BDD - Mastermind : Internal Design</a>, I defined there the acceptance criterias the way a stakeholder would define them ( more or less, that&rsquo;s my humble contribution ). Let&rsquo;s bring it back to write a couple of them in gherkin.</p>
+
+<ul>
+<li>The screen should contain nine rows and five columns.</li>
+<li>The left most column has to be gray.</li>
+<li>The other five columns has to be white.</li>
+<li>When I first open the app, a new game should be ready.</li>
+<li>When a new game starts, the screen should contain no colors and no results.</li>
+</ul>
+
+
+<p>As you can imagine there are many ways to write those acceptance criterias in gherkin. The one I choosed is the following one.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf">Scenario: Initial situation</span>
+</span><span class='line'><span class="nf">  </span><span class="k">Given </span><span class="nf">I am on the Initial Screen</span>
+</span><span class='line'><span class="nf">  </span><span class="k">Then </span><span class="nf">a new game should be ready</span><span class="nv">&lt;/p&gt;</span><span class="nf"></span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">&lt;p&gt;</span><span class="nf"></span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>As you might deduct, the step &ldquo;<em>Given I am on the Initial Screen</em>&rdquo; includes</p>
+
+<ul>
+<li>The screen should contain nine rows and five columns.</li>
+<li>The left most column has to be gray.</li>
+<li>The other five columns has to be white.</li>
+</ul>
+
+
+<p>There are, at least, two ways we can do it. Creating one step for each condition and then putting them all together in a single step called &ldquo;Given I am on the Initial Screen&rdquo; or creating all steps into the &ldquo;Given I am on the Initial Screen&rdquo;.</p>
+
+<p>I decided to go this second way, but it would be a good practice if you try to do it the other way and see how it works the same way or even better.</p>
+
+<p>So let&rsquo;s dive into the definition of the steps.</p>
+
+<p>First of all, go to your project folder, be sure you are in the same folder as your .xcproject and then run</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='vctreestatus'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;$ gem install calabash-cucumber&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;$ calabash-ios setup
+</span><span class='line'>Checking if Xcode is running&amp;hellip;&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>When it is finished, open the new created .xcworkspace file and build the new target you have ending in -cal . You need to do it because cucumber needs a binary to run the tests on, otherwise you are going to start having complains from cucumber.</p>
+
+<p>In the project folder you&rsquo;ll see a new folder called features, that&rsquo;s where all cucumber magic lives.</p>
+
+<p>When you open the .feature file and replace the default feature for your new feature and you run cucumber, this is what you are going to see:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='vctreestatus'><span class='line'>&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;╰─$ DEVICE_TARGET=&amp;lsquo;iPhone 6 (8.1 Simulator)&amp;rsquo; cucumber
+</span><span class='line'>Feature: Board behaviour
+</span><span class='line'>  As a Player
+</span><span class='line'>  I want to see how the cells react to my taps as expected
+</span><span class='line'>  So I can begin playing&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;  Scenario: Initial situation        # features/start.feature:6
+</span><span class='line'>    Given I am on the Initial Screen # features/start.feature:7
+</span><span class='line'>    Then a new game should be ready  # features/start.feature:8&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;1 scenario (1 undefined)
+</span><span class='line'>2 steps (2 undefined)
+</span><span class='line'>0m15.800s&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;You can implement step definitions for undefined steps with these snippets:&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;Given(/^I am on the Initial Screen$/) do
+</span><span class='line'>  pending # express the regexp above with the code you wish you had
+</span><span class='line'>end&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;Then(/^a new game should be ready$/) do
+</span><span class='line'>  pending # express the regexp above with the code you wish you had
+</span><span class='line'>end&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></p>
+
+<blockquote><p>Note that the command used to run the test &lsquo;<em>DEVICE_TARGET=&#8217;iPhone 6 (8.1 Simulator)&rsquo; cucumber</em>&lsquo;. Please take a look at <a href="https://github.com/calabash/calabash-ios/wiki" title="Documentation fo Calabash">calabash documentation</a> for more options.</p></blockquote>
+
+<p>You can see how cucumber helps us.</p>
+
+<blockquote><p>You can implement step definitions for undefined steps with these snippets:</p>
+
+<p>Given(/^I am on the Initial Screen$/) do
+  pending # express the regexp above with the code you wish you had
+end</p>
+
+<p>Then(/^a new game should be ready$/) do
+  pending # express the regexp above with the code you wish you had
+end</p></blockquote>
+
+<p>Those are the steps you need to implement inside your features/step_definitions/mastermind_steps.rb file. Let&rsquo;s take a look on how I&rsquo;ve defined them.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;Given /</span><span class="o">^</span><span class="n">I</span> <span class="n">am</span> <span class="n">on</span> <span class="n">the</span> <span class="no">Initial</span> <span class="no">Screen</span><span class="vg">$/</span> <span class="k">do</span>
+</span><span class='line'>  <span class="c1"># The screen should contain nine rows and five columns</span>
+</span><span class='line'>  <span class="n">rows</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">view</span> <span class="p">{</span><span class="n">accessibilityLabel</span> <span class="no">BEGINSWITH</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">Combination</span> <span class="no">Row</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;}</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span>
+</span><span class='line'>  <span class="nb">fail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">The</span> <span class="n">screen</span> <span class="n">should</span> <span class="n">contain</span> <span class="n">nine</span> <span class="n">rows</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span> <span class="k">if</span> <span class="n">rows</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">9</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # Following the mock, those rows have to be as wide as the screen</span>
+</span><span class='line'><span class="sr">  window = query(&amp;ldquo;window&amp;rdquo;)</span>
+</span><span class='line'><span class="sr">  rows.each do |row|</span>
+</span><span class='line'><span class="sr">    if row[&amp;ldquo;frame&amp;rdquo;][&amp;ldquo;width&amp;rdquo;] != window.first[&amp;ldquo;frame&amp;rdquo;][&amp;ldquo;width&amp;rdquo;]</span>
+</span><span class='line'><span class="sr">       fail(&amp;ldquo;All rows have to be as wide as the screen&amp;rdquo;)</span>
+</span><span class='line'><span class="sr">    end</span>
+</span><span class='line'><span class="sr">  end</span>
+</span><span class='line'><span class="sr">  # Following the mock, the rows have distributed along the screen&lt;br/</span><span class="o">&gt;</span>
+</span><span class='line'>  <span class="n">lastFloor</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class='line'>  <span class="n">rows</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">row</span><span class="o">[&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">frame</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">][&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">y</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">]</span> <span class="o">!=</span> <span class="n">lastFloor</span>
+</span><span class='line'>       <span class="nb">fail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">Each</span> <span class="n">row</span> <span class="n">has</span> <span class="n">to</span> <span class="n">be</span> <span class="n">after</span> <span class="n">the</span> <span class="n">previous</span> <span class="n">one</span><span class="p">,</span> <span class="n">expecting</span> <span class="c1">#{lastFloor}, #{row[&quot;frame&amp;rdquo;][&amp;ldquo;y&amp;rdquo;]} found&quot;)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="nb">fail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">All</span> <span class="n">rows</span> <span class="n">should</span> <span class="n">be</span> <span class="n">higher</span> <span class="n">than</span> <span class="n">zero</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span> <span class="k">if</span> <span class="n">row</span><span class="o">[&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">frame</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">][&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">height</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>    <span class="n">lastFloor</span> <span class="o">=</span> <span class="n">row</span><span class="o">[&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">frame</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">][&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">y</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">]</span> <span class="o">+</span> <span class="n">row</span><span class="o">[&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">frame</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">][&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">height</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">]</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  # All rows are combination</span>
+</span><span class='line'><span class="sr">  rows.each do |row|</span>
+</span><span class='line'><span class="sr">    fail(&amp;ldquo;All rows must be combination rows but </span><span class="si">#{</span><span class="n">row</span><span class="o">[</span><span class="s2">&quot;class&amp;rdquo;]} was found&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">row</span><span class="o">[&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">class</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span><span class="o">]</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">MMCombinationRow</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  sleep(STEP_PAUSE)</span>
+</span><span class='line'><span class="sr">end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">Then</span><span class="p">(</span><span class="sr">/^a new game should be ready$/</span><span class="p">)</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">rows</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">view</span> <span class="p">{</span><span class="n">accessibilityLabel</span> <span class="no">BEGINSWITH</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">Combination</span> <span class="no">Row</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span><span class="si">}</span><span class="sr">&amp;rdquo;)&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span>  <span class="n">rows</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;combination = row[&quot;label&quot;][18..23]</span>
+</span><span class='line'><span class="sr">fail(&quot;All rows combinations must be empty but </span><span class="si">#{</span><span class="n">combination</span><span class="si">}</span><span class="sr"> was found&quot;) if combination != &quot;&#39;    &#39;&quot;</span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end&lt;/</span><span class="nb">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="k">end</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>To match one buy one the acceptance criterias with the steps let&rsquo;s split it.</p>
+
+<ul>
+<li>The screen should contain nine rows and five columns.</li>
+</ul>
+
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># The screen should contain nine rows and five columns</span>
+</span><span class='line'>  <span class="n">rows</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">view</span> <span class="p">{</span><span class="n">accessibilityLabel</span> <span class="no">BEGINSWITH</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="no">Combination</span> <span class="no">Row</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;}</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span>
+</span><span class='line'>  <span class="nb">fail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">The</span> <span class="n">screen</span> <span class="n">should</span> <span class="n">contain</span> <span class="n">nine</span> <span class="n">rows</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span> <span class="k">if</span> <span class="n">rows</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Previoulsy to this step, you can find a new class in the code called <em>MMCombinationRow</em> that has been created with TDD and ensures containing five cells, one result cell and four color cells. So what&rsquo;s missing here is the number of rows.</p>
+
+<p>Another way to implement this check is:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="c1"># The screen should contain nine rows and five columns</span>
+</span><span class='line'>  <span class="n">rows</span> <span class="o">=</span> <span class="n">query</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">MMCombinationRow</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span>
+</span><span class='line'>  <span class="nb">fail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="no">The</span> <span class="n">screen</span> <span class="n">should</span> <span class="n">contain</span> <span class="n">nine</span> <span class="n">rows</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;)</span> <span class="k">if</span> <span class="n">rows</span><span class="o">.</span><span class="n">count</span> <span class="o">!=</span> <span class="mi">9</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>Go and implement the rest and see how it fails and what have you got to change to make it pass and then go and run the unit tests to ensure you didn&rsquo;t break anything.</p>
+
+<p>If all goes fine, just making a <em>git checkout</em> of <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_7" title="MasterMind-BDD Step7">Step 7</a> and you should see something like this:</p>
+
+<p><div class="embed-video-container"><iframe src="//www.youtube.com/embed/RYihMe_5yws" allowfullscreen></iframe></div></p>
+
+<p>Remember you can find the code of this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_8" title="MasterMind-BDD Step5">this commit, Step 8</a>.</p>
+
+<p>If you like it, please share! Thank you for reading me.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[BDD - Mastermind : View Preparation]]></title>
+    <link href="http://blog.guillem.mobi/blog/2014/11/10/bdd-mastermind-view-preparation/"/>
+    <updated>2014-11-10T13:25:00+01:00</updated>
+    <id>http://blog.guillem.mobi/blog/2014/11/10/bdd-mastermind-view-preparation</id>
+    <content type="html"><![CDATA[<p>This is the fifth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/" title="BDD - Mastermind : View preparation to make the UI testable">here</a>.</p>
+
+<p>In the previous post I went through a way to test the visible result of the custom view in a very intuitive way. It was just an exercise to test how, in a simple way, we could have a complete test of how we expect our view looks like. The truth is that this is a feeble method as it depends on an image that might or might not be 100% achievable by the tools we can make use of.</p>
+
+<p>The purpose of the previous post was to introduce the technique we are going to use in this post. We are going to go through a technique that allows us to test the final behavior in a more secure and maintainable way.</p>
+
+<p>You can find the code corresponding to this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_6" title="MasterMind-BDD Step6">this commit</a>. Go and get it!</p>
+
+<!-- more -->
+
+
+<h1>The result cells</h1>
+
+<p><img class="left <a" src="href="https://farm3.staticflickr.com/2941/15101651020_46fb32d967_o.jpg">https://farm3.staticflickr.com/2941/15101651020_46fb32d967_o.jpg</a>&#8221; width=&#8221;190&#8221; height=&#8221;490&#8221; title=&#8221;&lsquo;Mastermind Sketch With zones&rsquo; &lsquo;Mastermind board Sketch with zones&rsquo;&#8221; ></p>
+
+<p>The second element we have on the screen is the results cell. If you remember from the first post of the series, we defined three areas to consider. Area number three is a special kind of view that provides different visual aspects depending on the result we are providing. The rules are described in the second post of the series <a href="/blog/2014/09/25/bdd-mastermind-internal-design/" title="BDD - Mastermind : Internal design">BDD - Mastermind : Internal design</a>, but we need add a few more &ldquo;conditions&rdquo; to have a really robust view that does what we want it to do.</p>
+
+<p><strong>First</strong> - We are only accepting two different symbols, no matter which symbols but just two different.<br>
+<strong>Second</strong> - If the first symbol is a space, then it is considered there are no symbols of the first type and all the symbols are considered second kind.<br>
+<strong>Third</strong> - As there is no specification, the circles will try to fill as much space as possible. One symbol will end in a single big circle.</p>
+
+<p>With this in mind we have enough information to start creating the tests to implement the result cell.</p>
+
+<h1>Test and implementation</h1>
+
+<p>A very common practice is to create helper methods to simplify the test and provide more clarity. In this case we need to create a combination generator, so I implement this random combination generators.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// Helper Methods</span>
+</span><span class='line'><span class="o">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">generateRandomCharString</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="c1">// Available symbols</span>
+</span><span class='line'>    <span class="bp">NSString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">symbols</span> <span class="o">=</span> <span class="p">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span><span class="c1">// Pick a random index to extract two symbols</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">symbolIndex</span> <span class="o">=</span> <span class="n">arc4random_uniform</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="n">symbols</span><span class="p">.</span><span class="n">length</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Obtain the two random symbols</span>
+</span><span class='line'><span class="bp">NSString</span> <span class="o">*</span><span class="n">symbol</span> <span class="o">=</span> <span class="p">[</span><span class="n">symbols</span> <span class="nl">substringWithRange</span><span class="p">:</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="n">symbolIndex</span><span class="p">,</span> <span class="mi">1</span><span class="p">)];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// Obtain random number of each symbols</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">length</span> <span class="o">=</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="bp">NSMutableString</span> <span class="o">*</span><span class="n">resultString</span> <span class="o">=</span> <span class="p">[</span><span class="bp">NSMutableString</span> <span class="nl">stringWithString</span><span class="p">:</span><span class="s">@&quot;&quot;</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">n</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">length</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">resultString</span> <span class="nl">appendString</span><span class="p">:</span><span class="n">symbol</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">return</span> <span class="p">[</span><span class="n">resultString</span> <span class="k">copy</span><span class="p">];</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="bp">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">generateRandomResult</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="bp">NSMutableString</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">resultString</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">self</span> <span class="n">generateRandomCharString</span><span class="p">]</span> <span class="n">mutableCopy</span><span class="p">];</span>
+</span><span class='line'>  <span class="k">return</span> <span class="p">[[</span><span class="n">resultString</span> <span class="nl">stringByAppendingString</span><span class="p">:[</span><span class="nb">self</span> <span class="n">generateRandomCharString</span><span class="p">]]</span> <span class="k">copy</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="bp">NSData</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="nl">dataForCellPNGRepresentationForView</span><span class="p">:(</span><span class="bp">UIView</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">view</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">UIGraphicsBeginImageContext</span><span class="p">(</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">view</span><span class="p">.</span><span class="n">layer</span> <span class="nl">renderInContext</span><span class="p">:</span><span class="n">UIGraphicsGetCurrentContext</span><span class="p">()];</span>
+</span><span class='line'>  <span class="bp">UIImage</span><span class="o">*</span> <span class="n">image1</span> <span class="o">=</span> <span class="n">UIGraphicsGetImageFromCurrentImageContext</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">UIGraphicsEndImageContext</span><span class="p">();</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nf">UIImagePNGRepresentation</span><span class="p">(</span><span class="n">image1</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ul>
+<li><strong>generateRandomCharString</strong> - Is used to generate a string of random lenght of a random symbol. As you can see I previously have defined the array of valid symbols which contain no space. A good practice would be to add a test to check that any symbol placed is included in the set of valid symbols.</li>
+<li><strong>generateRandomResult</strong> - Is the method used to create a combination of two symbols.</li>
+<li><strong>dataForCellPNGRepresentationForView</strong> - Is the method used to obtain a png representation of the view. That is the way we can compare two views at visual level.</li>
+</ul>
+
+
+<p>Now that we have all we need, let&rsquo;s write some tests. I won&rsquo;t go though each test as they are trivial, just list them.</p>
+
+<ul>
+<li>Test that on init the background is transparent.</li>
+<li>Test that on init the combination value is empty.</li>
+<li>Test that when the combination changes bezier path changes.</li>
+<li>Test that when the combination is empty bezier paths contains zero circles.</li>
+<li>Test that when the combination changes bezier paths contains the same number of circles as the length of the combination.</li>
+<li>Test that when the combination has more than two different symbols only first two are stored.</li>
+<li>Test that when the combination changes bezier paths contains only bezier paths;</li>
+</ul>
+
+
+<h1>The final method for testing the visual result</h1>
+
+<p>As I commented before, testing against images has some important limitations like depending on the device implementation, small changes makes the test fail, etc &hellip; So, which is the best way to do it? Well nothing better than comparing a view with another view. That way we can be sure there is no difference and we can update easily the implementation.</p>
+
+<p>To do it, you just need to create a view that looks like what you expect your view to look like.</p>
+
+<p>You might think, that is duplicating the effort.</p>
+
+<p>Well, create a dummy view that just does one thing is not duplicating the effort, is prototyping what you expect to obtain and also lets you define some rules that you might translate to your view.</p>
+
+<p>Let&rsquo;s take a look at the dummy view I&rsquo;ve implemented and you&rsquo;ll understand better what I mean.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="c1">// Dummy view to draw the image we expect&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@interface</span> <span class="nc">DummyView</span> : <span class="bp">UIView</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">strong</span><span class="p">)</span> <span class="bp">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">combination</span><span class="p">;</span>
+</span><span class='line'><span class="k">@property</span> <span class="p">(</span><span class="k">nonatomic</span><span class="p">,</span> <span class="k">strong</span><span class="p">)</span> <span class="bp">UIColor</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">color</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@implementation</span> <span class="nc">DummyView</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nl">initWithFrame</span><span class="p">:(</span><span class="bp">CGRect</span><span class="p">)</span><span class="n">frame</span> <span class="nl">combination</span><span class="p">:(</span><span class="bp">NSString</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">combination</span> <span class="nl">color</span><span class="p">:(</span><span class="bp">UIColor</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="p">)</span><span class="n">color</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nb">self</span> <span class="o">=</span> <span class="p">[</span><span class="nb">super</span> <span class="nl">initWithFrame</span><span class="p">:</span><span class="n">frame</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nb">self</span><span class="p">.</span><span class="n">combination</span> <span class="o">=</span> <span class="n">combination</span><span class="p">;</span>
+</span><span class='line'>      <span class="nb">self</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+</span><span class='line'>      <span class="nb">self</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIColor</span> <span class="n">clearColor</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">return</span> <span class="nb">self</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nl">drawRect</span><span class="p">:(</span><span class="bp">CGRect</span><span class="p">)</span><span class="n">rect</span> <span class="p">{</span>
+</span><span class='line'>  <span class="c1">// Obtain first char</span>
+</span><span class='line'>  <span class="kt">unichar</span> <span class="n">leftchar</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">combination</span> <span class="nl">characterAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+</span><span class='line'>  <span class="bp">NSString</span> <span class="o">*</span><span class="n">combination</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">combination</span> <span class="nl">stringByReplacingOccurrencesOfString</span><span class="p">:@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span> <span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="nl">withString</span><span class="p">:@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;];</span>
+</span><span class='line'>  <span class="c1">// Obtain rectangle ration</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">K</span> <span class="o">=</span> <span class="n">rect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="o">/</span><span class="n">rect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
+</span><span class='line'>  <span class="c1">// Obtain number of items</span>
+</span><span class='line'>  <span class="kt">long</span> <span class="n">N</span> <span class="o">=</span> <span class="n">combination</span><span class="p">.</span><span class="n">length</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="c1">// Obtain grid sizes</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">verItems</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">sqrtf</span><span class="p">(</span><span class="n">K</span><span class="o">*</span><span class="n">N</span><span class="p">));</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">horItems</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">sqrtf</span><span class="p">(</span><span class="n">N</span><span class="o">/</span><span class="n">K</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="c1">// Items horizontally</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">gridHeigh</span> <span class="o">=</span> <span class="n">rect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span> <span class="o">/</span> <span class="n">verItems</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">float</span> <span class="n">gridWidth</span> <span class="o">=</span> <span class="n">rect</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">horItems</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="c1">// Draw circles</span>
+</span><span class='line'>  <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">color</span> <span class="n">setFill</span><span class="p">];</span>
+</span><span class='line'>  <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="n">color</span> <span class="n">setStroke</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="bp">UIBezierPath</span> <span class="o">*</span><span class="n">bezPath</span><span class="p">;</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">currentElement</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">verItems</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="n">horItems</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="n">currentElement</span> <span class="o">=</span> <span class="p">(</span><span class="n">horItems</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="n">x</span> <span class="p">;</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="n">currentElement</span> <span class="o">&gt;=</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>          <span class="n">bezPath</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIBezierPath</span> <span class="nl">bezierPathWithOvalInRect</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="n">x</span><span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">gridWidth</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="n">gridHeigh</span><span class="p">,</span> <span class="n">gridWidth</span><span class="p">,</span> <span class="n">gridHeigh</span><span class="p">)];</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">([</span><span class="n">combination</span> <span class="nl">characterAtIndex</span><span class="p">:</span><span class="n">currentElement</span><span class="p">]</span> <span class="o">==</span> <span class="n">leftchar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>              <span class="p">[</span><span class="n">bezPath</span> <span class="n">fill</span><span class="p">];</span>
+</span><span class='line'>          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>              <span class="p">[</span><span class="n">bezPath</span> <span class="n">stroke</span><span class="p">];</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="k">@end</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>This is the final implementation of the view, but usually it will grow with your development. Adding new features that you expect to find in your view. And more important, will protect you from changing what you expect to see if you make any change in your code in the future.</p>
+
+<p>With that in mind, the tests become a lot more clear.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testIfNewResultHasOnlyOneSymbolByDefaultAreFirstSymbol</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">resultCell</span><span class="p">.</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="n">generateRandomCharString</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">resultCell</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">300</span><span class="p">),</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">300</span><span class="p">));</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">DummyView</span> <span class="o">*</span><span class="n">dummyV</span> <span class="o">=</span> <span class="p">[[</span><span class="n">DummyView</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithFrame</span><span class="p">:</span><span class="n">resultCell</span><span class="p">.</span><span class="n">frame</span>
+</span><span class='line'>                                           <span class="nl">combination</span><span class="p">:</span><span class="n">resultCell</span><span class="p">.</span><span class="n">result</span>
+</span><span class='line'>                                                 <span class="nl">color</span><span class="p">:</span><span class="n">resultCell</span><span class="p">.</span><span class="n">color</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="bp">NSData</span> <span class="o">*</span><span class="n">expectedImage</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="nl">dataForCellPNGRepresentationForView</span><span class="p">:</span><span class="n">dummyV</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="bp">NSData</span> <span class="o">*</span><span class="n">obtainedImage</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span> <span class="nl">dataForCellPNGRepresentationForView</span><span class="p">:</span><span class="n">resultCell</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">XCTAssertEqualObjects</span><span class="p">(</span><span class="n">expectedImage</span><span class="p">,</span> <span class="n">obtainedImage</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<ol>
+<li>Create our view.</li>
+<li>Create a dummy view with the same parameters.</li>
+<li>Extract the representing images.</li>
+<li>Check both match.</li>
+</ol>
+
+
+<p>Take a look at the rest of the test, I think they are pretty clear, but if you believe there is something you can&rsquo;t see, just send me an email or leave me a comment.</p>
+
+<p>And with this post I finish with the TDD by now and we can start with the BDD.</p>
+
+<p>Please, leave me comments, share and like if you can! See you in the next post.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[BDD - Mastermind : View Preparation to Make the UI Testable]]></title>
+    <link href="http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/"/>
+    <updated>2014-10-21T17:43:42+02:00</updated>
+    <id>http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable</id>
+    <content type="html"><![CDATA[<p>This is the fourth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/" title="BDD - Mastermind : TDD in the Model">here</a>.</p>
+
+<p>If you thought we were going to jump straight to BDD I&rsquo;m afraid you&rsquo;ll have to wait a little more. To understand it, first of all I&rsquo;m going to explain which is the framework I decided to use to BDD and how does it work. With all that info you&rsquo;ll understand why we need to prepare the things to be able to BDD.</p>
+
+<p>You can find the code corresponding to this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_5" title="MasterMind-BDD Step5">this commit</a>. Go and get it!</p>
+
+<!-- more -->
+
+
+<h1>Calabash</h1>
+
+<h4>AUTOMATED ACCEPTANCE TESTING FOR MOBILE APPS</h4>
+
+<p>If you go to <a href="http://calaba.sh" title="Automated Acceptance Testing for iOS and Android Apps">calabash web site</a> you&rsquo;ll find this definition.</p>
+
+<blockquote><p>Calabash enables you to write and execute automated acceptance tests of mobile apps. Calabash is cross-platform, supporting Android and iOS native apps. It is open source and free, and has a company, Xamarin, backing and developing it.</p></blockquote>
+
+<p>The reasons I decided to go with calabash after some investigation and research are diverse. First of all was the ease of integrating it in your projects. Opposite to other platforms it is just a question of a few sentences to be able to integrate it. Second, it works with <em>cucumber</em>. I really love cucumber as a way to interface with non technical people and be able to understand the same things and write acceptance criterias that we both understand and agree, and more important, we can convert them in tests.</p>
+
+<p>When you are done with this post, never before ;), you can go to <a href="https://github.com/calabash/calabash-ios" title="calabash-ios github repository">github calabash iOS repository</a> and read how to install the gem and integrate it in your projects so you are able to follow the steps of this series of posts while you build your own, secure and testable app.</p>
+
+<p>What&rsquo;s more important to understand in this post is that calabash works with the accessibility labels to inspect and perform tasks on the simulator and the device. That&rsquo;s the reason why we can&rsquo;t go straight to the tests when we are going to create an app that contains a bunch of custom views and we need to see if that view is red, blue, green or yellow for example. Sadly this is something we can&rsquo;t get out of the box by now. But the good news are that we can create a view that is testable in that way.</p>
+
+<h2>Creating Testable Views - TDD to the rescue</h2>
+
+<p>First thing we need to do is to convert what is a view perception into an accessible label. How are we going to do it? Keep reading and you&rsquo;ll know how.</p>
+
+<p>As usual we&rsquo;ll start by creating a test file to test what I decided to call MMCell.</p>
+
+<p>The strategy used to create a view that behaves as we want it to behave visually when we can&rsquo;t test that it really happens is to break it in to parts. One is tested with TDD and ensures that when setting properties on a view the visual changes happens as we expect. The other part is that those visual changes are expressed in a simple way in the accessibility label.</p>
+
+<p>To do it we&rsquo;ll use two properties.</p>
+
+<ul>
+<li><strong>bezierPath</strong> : This is a <em>readonly</em> property that will reflect the shape that is going to be drawn in the view. This we can verify what is being drawn in the view.</li>
+<li><strong>color</strong> : This is a property to allow the app set the color of the circle that&rsquo;s going to be shown in the view.</li>
+</ul>
+
+
+<p>To better understand how we are going to make it, let&rsquo;s take a look at the first test:</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testWhenSizeChangesPathSizeChanges</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">cell</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'>  <span class="bp">UIBezierPath</span> <span class="o">*</span><span class="n">expectedBezier</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIBezierPath</span> <span class="nl">bezierPathWithOvalInRect</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">XCTAssertTrue</span><span class="p">(</span><span class="n">CGPathEqualToPath</span><span class="p">([</span><span class="n">expectedBezier</span> <span class="bp">CGPath</span><span class="p">],</span> <span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">bezierPath</span> <span class="bp">CGPath</span><span class="p">]),</span>
+</span><span class='line'>                <span class="p">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">Bezier</span> <span class="n">Path</span> <span class="n">does</span> <span class="n">not</span> <span class="n">match</span> <span class="n">expected</span> <span class="n">shape</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>The test is very simple. We get a random height and a random width, both between 0 and 200, and check that when we set the frame of the view the path generated matches what we expect. This doesn&rsquo;t guarantees that this is what is going to be drawn. To do it we need to go one step forward.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testFillIsCalledOnBezierPathWhenDrawRectIsCalled</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">id</span> <span class="n">bezierMock</span> <span class="o">=</span> <span class="n">OCMPartialMock</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">bezierPath</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">OCMStub</span><span class="p">([</span><span class="n">bezierMock</span> <span class="n">fill</span><span class="p">]).</span><span class="n">andForwardToRealObject</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">cell</span> <span class="nl">drawRect</span><span class="p">:</span><span class="n">cell</span><span class="p">.</span><span class="n">bounds</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">OCMVerify</span><span class="p">([</span><span class="n">bezierMock</span> <span class="n">fill</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>This test what basically does is to check if, when drawRect is called also fill is called on bezierPath object. To do it I use one of the best friends you can have when TDDing, <strong>Mocks</strong>. Sadly this is something that is not natively implemented in XCTest, so we need to find third party developments to use it. There are different libraries that implement mocks for iOS. In this case I decided to choose <a href="http://ocmock.org/" title="OCMock Web Site">OCMock</a> which is a very well known and tested libraries, but <a href="https://github.com/jonreid/OCMockito" title="OCMockito GitHub Page">OCMockito</a> is also an excellent option.</p>
+
+<p>Basically a mock is an object that &ldquo;replaces&rdquo; totally or partially the object you are trying to test or an object you want to behave in a certain way so you check what happens or make things happen in a controlled environment.</p>
+
+<p>I know this sounds a little weird, so if you want me to write a full post about Mocking in iOS, please ask me for it in the comments or twitter and I&rsquo;ll prepare it.</p>
+
+<p>This is a good moment to introduce another player that will join you projects very often.</p>
+
+<h1>CocoaPods</h1>
+
+<p>If you are already familiar with CocoaPods you can jump straight to <a href="#testinwhatitlookslike">Testing what it looks like</a>.</p>
+
+<p>In <a href="http://cocoapods.org" title="CocoaPods Web Site">CocoaPods Web Site</a> they define themselves as</p>
+
+<blockquote><p>CocoaPods is the dependency manager for Objective-C projects. It has thousands of libraries and can help you scale your projects elegantly.</p></blockquote>
+
+<p>I would add to it that they do it in an <em>awesome and very clean way</em>.</p>
+
+<p>Until I discovered CocoaPods I needed to include, organize and maintain third party developments manually. CocoaPods let&rsquo;s you do it all in a very clean and isolated way so you can start using the those libraries in less than five minutes.</p>
+
+<p>Let&rsquo;s see how to do it in our case.</p>
+
+<p>You have a very complete instruction set in <a href="http://cocoapods.org" title="CocoaPods Web Site">CocoaPods Web Site</a> but basically is three steps.</p>
+
+<ol>
+<li>Install the gem with <em>sudo gem install cocoapods</em>.</li>
+<li>Create a file named &ldquo;<em>Podfile</em>&rdquo; in the same folder you have your .xcodeproj file and include the information you need in it.</li>
+<li>Run <em>pod install</em> from the terminal in that folder.</li>
+</ol>
+
+
+<p>After those three simple steps you&rsquo;ll have a new .xcworkspace file with two projects in it, one your project and the other the project to build the pods library.</p>
+
+<p>From this point you just need to include the pod header you need in each file you need it. In this case by now I just need to include <strong>&lt;OCMock/OCMock.h></strong> in the Test File.</p>
+
+<p>The content of this first version of the Podfile is the following.</p>
+
+<pre><code>source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '8.0'
+
+xcodeproj 'MasterMind'
+
+target :MasterMindTests do
+    pod 'OCMock', '~&gt; 3.1.1'
+end
+</code></pre>
+
+<p>Note that I added the pod only to the Test target, that means this pod won&rsquo;t be available in release target, which is what we want.</p>
+
+<h1>Testing what it looks like<a name="testinwhatitlookslike"></a></h1>
+
+<p>We need to do the same we&rsquo;ve done with bezierPath with color so we ensure that &ldquo;<em>setFill</em>&rdquo; is called on color property when &ldquo;<em>drawRect</em>&rdquo; is called on the view.</p>
+
+<p>This test will make it.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testSetFillIsCalledOnColorWhenDrawRectIsCalled</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">id</span> <span class="n">colorMock</span> <span class="o">=</span> <span class="n">OCMPartialMock</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">color</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">OCMStub</span><span class="p">([</span><span class="n">colorMock</span> <span class="n">setFill</span><span class="p">]).</span><span class="n">andForwardToRealObject</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="p">[</span><span class="n">cell</span> <span class="nl">drawRect</span><span class="p">:</span><span class="n">cell</span><span class="p">.</span><span class="n">bounds</span><span class="p">];</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">OCMVerify</span><span class="p">([</span><span class="n">colorMock</span> <span class="n">setFill</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>At this point we know the properties are set, updated on changes, called SetNeedsDiplay to request redraw ( look at the code ) and we are sure that they are called when drawRect is called, but how can we ensure the last result is what we expect to be. There are many ways to do it so here is what I suggest in this case. Remember I&rsquo;m not trying to be exhaustive in this series but create an exercise to show you all the possibilities we have so far to test an app.</p>
+
+<p>The best way to let the test see if the final result is what we want is compare it with an image that represents what we want, so that&rsquo;s what we are going to do. In this case I took some images that represents what the view should look like in different circumstances. Those are:</p>
+
+<table>
+    <tr>
+        <td><img src = "https://farm6.staticflickr.com/5610/15597069961_c34ebc6b67_o.png"/></td>
+        <td><img src = "https://farm6.staticflickr.com/5597/15413734867_80e3391e9f_o.png"/></td>
+        <td><img src = "https://farm4.staticflickr.com/3953/15413114649_192d2a1f54_o.png"/></td>
+        <td><img src = "https://farm4.staticflickr.com/3944/15413734757_cf408a786c_o.png"/></td>
+    </tr>
+</table>
+
+
+<p>Now, how to check the view against the image? This is the test.</p>
+
+<p><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testViewMatchesExpectedImage</span>
+</span><span class='line'><span class="p">{</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">cell</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'>  <span class="n">cell</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="bp">NSString</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">fileImageName</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSBundle</span> <span class="nl">bundleForClass</span><span class="p">:[</span><span class="nb">self</span> <span class="k">class</span><span class="p">]]</span> <span class="nl">pathForResource</span><span class="p">:</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">testImageRed</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="nl">ofType</span><span class="p">:@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">png</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;];</span>
+</span><span class='line'>  <span class="bp">UIImage</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">fileImageObj</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">UIImage</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithContentsOfFile</span><span class="p">:</span><span class="n">fileImageName</span><span class="p">];</span>
+</span><span class='line'>  <span class="bp">UIImage</span> <span class="o">*</span><span class="n">expectedImage</span> <span class="o">=</span> <span class="n">UIImagePNGRepresentation</span><span class="p">(</span><span class="n">fileImageObj</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">UIGraphicsBeginImageContext</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">layer</span> <span class="nl">renderInContext</span><span class="p">:</span><span class="n">UIGraphicsGetCurrentContext</span><span class="p">()];</span>
+</span><span class='line'>  <span class="bp">UIImage</span><span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span> <span class="n">image1</span> <span class="o">=</span> <span class="n">UIGraphicsGetImageFromCurrentImageContext</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">UIGraphicsEndImageContext</span><span class="p">();</span>
+</span><span class='line'>  <span class="bp">UIImage</span> <span class="o">&lt;/</span><span class="n">em</span><span class="o">&gt;</span><span class="n">viewImage</span><span class="o">=</span>  <span class="n">UIImagePNGRepresentation</span><span class="p">(</span><span class="n">image1</span><span class="p">);</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="n">XCTAssertEqualObjects</span><span class="p">(</span><span class="n">viewImage</span><span class="p">,</span> <span class="n">expectedImage</span><span class="p">,</span> <span class="p">@</span><span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="n">View</span> <span class="n">should</span> <span class="n">look</span> <span class="n">like</span> <span class="n">the</span> <span class="n">image</span><span class="o">&amp;</span><span class="n">rdquo</span><span class="p">;);</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></p>
+
+<p>The base is that we obtain the NSData representation of both images and we compare them, that will tell us if they match or doesn&rsquo;t.</p>
+
+<p>And that&rsquo;s all for now. Now we have testable view cells. We need testable result cells and then we can start with BDD.</p>
+
+<p>Remember you can find the code of this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_5" title="MasterMind-BDD Step5">this commit</a>.</p>
+
+<p>If you like it, please share! If you believe there is some part that needs more detail or want to suggest a new post like with Mocking, just send me your thoughts.</p>
+
+<p>Thank you for reading me.</p>
+
+<p>In the next post <a href="/blog/2014/11/10/bdd-mastermind-view-preparation/" title="BDD - Mastermind : View Preparation">BDD - Mastermind : View Preparation</a> we&rsquo;ll find a more robust and maintainable way to create tests for the visual aspect.</p>
+]]></content>
+  </entry>
+  
+</feed>
