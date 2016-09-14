@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Extra | Guillem Fernandez]]></title>
-  <link href="http://blog.guillem.mobi/blog/categories/extra/atom.xml" rel="self"/>
-  <link href="http://blog.guillem.mobi/"/>
-  <updated>2016-09-12T18:21:23+02:00</updated>
-  <id>http://blog.guillem.mobi/</id>
+  <link href="http://guillemf.github.io/blog/categories/extra/atom.xml" rel="self"/>
+  <link href="http://guillemf.github.io/"/>
+  <updated>2016-09-14T15:34:13+02:00</updated>
+  <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[BDD: From the Idea to the App 2]]></title>
-    <link href="http://blog.guillem.mobi/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/"/>
+    <link href="http://guillemf.github.io/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/"/>
     <updated>2014-08-20T19:08:52+02:00</updated>
-    <id>http://blog.guillem.mobi/blog/2014/08/20/bdd-from-the-idea-to-the-app-2</id>
+    <id>http://guillemf.github.io/blog/2014/08/20/bdd-from-the-idea-to-the-app-2</id>
     <content type="html"><![CDATA[<p>It&rsquo;s been almost two years since I wrote my post from the idea to the App, and that&rsquo;s a long time. Since then many things changed and I&rsquo;ve been working a lot on BDD and TDD. So I guess this is a great moment to start a new series of posts about how to do the full process.</p>
 
 <p>Last year I did a formation on iOS development. The final lessons consisted in creating a game, the Mastermind game. I think it is a good idea to use this example to build and app using TDD and BDD. Of course this process will not contain the full creation process with all details as it would take ages, even a book to do it, but I will include the headlines of the process with all the details and guides to complete the process, and of course with the code to do it.</p>
@@ -75,9 +75,9 @@
   
   <entry>
     <title type="html"><![CDATA[BDD - From the Idea to the App]]></title>
-    <link href="http://blog.guillem.mobi/blog/2012/11/14/bdd-from-the-idea-to-the-app/"/>
+    <link href="http://guillemf.github.io/blog/2012/11/14/bdd-from-the-idea-to-the-app/"/>
     <updated>2012-11-14T21:31:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2012/11/14/bdd-from-the-idea-to-the-app</id>
+    <id>http://guillemf.github.io/blog/2012/11/14/bdd-from-the-idea-to-the-app</id>
     <content type="html"><![CDATA[<p>This article is about how to move from this:</p>
 
 <p>“In order to avoid mistakes users must be able to calculate a sum. As example, starting on the Welcome Screen when I touch &ldquo;3&rdquo; and I touch &ldquo;+&rdquo; and I touch &ldquo;2&rdquo; and I touch &ldquo;=&rdquo; then I should see a &ldquo;5&rdquo; in the screen. When I touch &ldquo;4&rdquo; and I touch &ldquo;+&rdquo; and I touch &ldquo;2&rdquo; and I touch &ldquo;=&rdquo; then I should see a &ldquo;6&rdquo; in the screen.”</p>
@@ -400,15 +400,15 @@ Feature: Sums
 </ul>
 
 
-<p>Any comments, please send me an email to <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#58;&#98;&#x6c;&#111;&#103;&#64;&#103;&#117;&#105;&#x6c;&#x6c;&#101;&#109;&#x66;&#x65;&#114;&#x6e;&#97;&#110;&#x64;&#101;&#x7a;&#x2e;&#x63;&#111;&#109;">&#x62;&#x6c;&#x6f;&#x67;&#64;&#x67;&#x75;&#x69;&#x6c;&#x6c;&#x65;&#109;&#102;&#101;&#x72;&#x6e;&#97;&#x6e;&#100;&#x65;&#x7a;&#46;&#x63;&#x6f;&#x6d;</a></p>
+<p>Any comments, please send me an email to <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#98;&#x6c;&#x6f;&#103;&#x40;&#103;&#117;&#x69;&#x6c;&#108;&#101;&#x6d;&#102;&#101;&#114;&#110;&#x61;&#110;&#100;&#x65;&#x7a;&#x2e;&#x63;&#x6f;&#109;">&#x62;&#108;&#x6f;&#103;&#x40;&#x67;&#117;&#105;&#108;&#x6c;&#101;&#109;&#x66;&#x65;&#x72;&#x6e;&#97;&#x6e;&#x64;&#101;&#x7a;&#x2e;&#x63;&#111;&#109;</a></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[OAuth 2]]></title>
-    <link href="http://blog.guillem.mobi/blog/2012/11/14/oauth-2/"/>
+    <link href="http://guillemf.github.io/blog/2012/11/14/oauth-2/"/>
     <updated>2012-11-14T21:28:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2012/11/14/oauth-2</id>
+    <id>http://guillemf.github.io/blog/2012/11/14/oauth-2</id>
     <content type="html"><![CDATA[<h2>What is OAuth 2.0</h2>
 
 <p>Considering the environment in which we develop our applications, not taking advantage of all data and services that are offered by the most important technology and services companies in the world, could result in a loss of opportunities. For the same reason, the fact that there is such a variety of services, the average user ends registering himself multiple times in multiple services, so each time you request a service from a user to register and fill in the relevant data is an occasion on which that user may be lost, so ideally the user would give us a place to go to find this information easily.</p>

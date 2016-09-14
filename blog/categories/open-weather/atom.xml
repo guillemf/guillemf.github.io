@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Open Weather | Guillem Fernandez]]></title>
-  <link href="http://blog.guillem.mobi/blog/categories/open-weather/atom.xml" rel="self"/>
-  <link href="http://blog.guillem.mobi/"/>
-  <updated>2016-09-12T18:21:23+02:00</updated>
-  <id>http://blog.guillem.mobi/</id>
+  <link href="http://guillemf.github.io/blog/categories/open-weather/atom.xml" rel="self"/>
+  <link href="http://guillemf.github.io/"/>
+  <updated>2016-09-14T15:34:13+02:00</updated>
+  <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Open Weather - Inception Deck]]></title>
-    <link href="http://blog.guillem.mobi/blog/2012/11/13/open-weather-inception-deck/"/>
+    <link href="http://guillemf.github.io/blog/2012/11/13/open-weather-inception-deck/"/>
     <updated>2012-11-13T22:35:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2012/11/13/open-weather-inception-deck</id>
+    <id>http://guillemf.github.io/blog/2012/11/13/open-weather-inception-deck</id>
     <content type="html"><![CDATA[<ul>
 <li>To give the community new material that can be freely distributed.</li>
 <li>To have a good time.</li>

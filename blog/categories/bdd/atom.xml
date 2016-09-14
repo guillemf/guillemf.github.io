@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Bdd | Guillem Fernandez]]></title>
-  <link href="http://blog.guillem.mobi/blog/categories/bdd/atom.xml" rel="self"/>
-  <link href="http://blog.guillem.mobi/"/>
-  <updated>2016-09-12T18:21:23+02:00</updated>
-  <id>http://blog.guillem.mobi/</id>
+  <link href="http://guillemf.github.io/blog/categories/bdd/atom.xml" rel="self"/>
+  <link href="http://guillemf.github.io/"/>
+  <updated>2016-09-14T15:34:13+02:00</updated>
+  <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
     
@@ -15,18 +15,32 @@
   
   <entry>
     <title type="html"><![CDATA[What Is the Status of BDD in Swift]]></title>
-    <link href="http://blog.guillem.mobi/blog/2016/09/08/what-is-the-status-of-bdd-in-swift/"/>
+    <link href="http://guillemf.github.io/blog/2016/09/08/what-is-the-status-of-bdd-in-swift/"/>
     <updated>2016-09-08T17:31:12+02:00</updated>
-    <id>http://blog.guillem.mobi/blog/2016/09/08/what-is-the-status-of-bdd-in-swift</id>
-    <content type="html"><![CDATA[<p>Back again</p>
+    <id>http://guillemf.github.io/blog/2016/09/08/what-is-the-status-of-bdd-in-swift</id>
+    <content type="html"><![CDATA[<p>Again woking on a project with a heavy load on BDD.</p>
+
+<p>In this case we had a greenfield project in front of us, as nothing done regarding automation was usable here. Obviously my advice was to opt for a Calabash based solution as I believe it&rsquo;s a great, &lsquo;standardised&rsquo; and long term solution.</p>
+
+<p>Calabash is a cucumber based solution that works pretty well with iOS. Of corse you find some problems, the main one is that is an intrusive solution based on the inclusion of an http server. That server allows the communication between the cucumber Gem and the iOS app, to access to the UI elements and perform the different actions on it. That brings the problem of being dependent on the system.</p>
+
+<p>With Swift calabash still works, but with the new UI Testing framework a new solution appears.</p>
+
+<p>Up to now I didn&rsquo;t dive into the nitty-gritties of the tool and to do it, there is no better way than creating an app.</p>
+
+<p>It&rsquo;s going to be a simple app that will only allow you to make some voice records on your iPhone, I could call it YAMVR, but probably I will go for something more glamourous.</p>
+
+<p>So stay tunned and send any comment you have if you want me to check something special or add any feature to the app.</p>
+
+<p>Thanks for reading me and don&rsquo;t forget to follow me on twitter and check my repos in github.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[BDD - Mastermind : Adding Calabash and Creating Our First Tests]]></title>
-    <link href="http://blog.guillem.mobi/blog/2014/11/20/bdd-mastermind-adding-calabash-and-creating-our-first-tests/"/>
+    <link href="http://guillemf.github.io/blog/2014/11/20/bdd-mastermind-adding-calabash-and-creating-our-first-tests/"/>
     <updated>2014-11-20T20:06:16+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2014/11/20/bdd-mastermind-adding-calabash-and-creating-our-first-tests</id>
+    <id>http://guillemf.github.io/blog/2014/11/20/bdd-mastermind-adding-calabash-and-creating-our-first-tests</id>
     <content type="html"><![CDATA[<p>This is the sixth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/11/10/bdd-mastermind-view-preparation/" title="BDD - Mastermind : View preparation">here</a>. If you just landed, better start on the <a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/" title="BDD: From the Idea to the App 2">first</a></p>
 
 <p>In this post is where we really start doing BDD, so get ready to enter to the new and exciting world of cucumber and behaviour driven development.</p>
@@ -542,9 +556,9 @@ end</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[BDD - Mastermind : View Preparation]]></title>
-    <link href="http://blog.guillem.mobi/blog/2014/11/10/bdd-mastermind-view-preparation/"/>
+    <link href="http://guillemf.github.io/blog/2014/11/10/bdd-mastermind-view-preparation/"/>
     <updated>2014-11-10T13:25:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2014/11/10/bdd-mastermind-view-preparation</id>
+    <id>http://guillemf.github.io/blog/2014/11/10/bdd-mastermind-view-preparation</id>
     <content type="html"><![CDATA[<p>This is the fifth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/" title="BDD - Mastermind : View preparation to make the UI testable">here</a>.</p>
 
 <p>In the previous post I went through a way to test the visible result of the custom view in a very intuitive way. It was just an exercise to test how, in a simple way, we could have a complete test of how we expect our view looks like. The truth is that this is a feeble method as it depends on an image that might or might not be 100% achievable by the tools we can make use of.</p>
@@ -908,9 +922,9 @@ end</p></blockquote>
   
   <entry>
     <title type="html"><![CDATA[BDD - Mastermind : View Preparation to Make the UI Testable]]></title>
-    <link href="http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/"/>
+    <link href="http://guillemf.github.io/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/"/>
     <updated>2014-10-21T17:43:42+02:00</updated>
-    <id>http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable</id>
+    <id>http://guillemf.github.io/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable</id>
     <content type="html"><![CDATA[<p>This is the fourth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/" title="BDD - Mastermind : TDD in the Model">here</a>.</p>
 
 <p>If you thought we were going to jump straight to BDD I&rsquo;m afraid you&rsquo;ll have to wait a little more. To understand it, first of all I&rsquo;m going to explain which is the framework I decided to use to BDD and how does it work. With all that info you&rsquo;ll understand why we need to prepare the things to be able to BDD.</p>
@@ -1202,9 +1216,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[BDD - Mastermind : TDD in the Model]]></title>
-    <link href="http://blog.guillem.mobi/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/"/>
+    <link href="http://guillemf.github.io/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/"/>
     <updated>2014-09-29T17:06:51+02:00</updated>
-    <id>http://blog.guillem.mobi/blog/2014/09/29/bdd-mastermind-tdd-in-the-model</id>
+    <id>http://guillemf.github.io/blog/2014/09/29/bdd-mastermind-tdd-in-the-model</id>
     <content type="html"><![CDATA[<p>This is the third post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/" title="BDD: From the Idea to the App 2">here</a>.</p>
 
 <p>It&rsquo;s time to get your hands dirty. To make it really easy I&rsquo;ve decided to tag each relevant commit with step numbers so you can follow step by step the process. I recommend you to code your own version, but if at some point you are lost, just checkout the step where you got lost and we&rsquo;ll be synchronized again.</p>

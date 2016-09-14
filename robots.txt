@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: http://blog.guillem.mobi/sitemap.xml
+Sitemap: http://guillemf.github.io/sitemap.xml

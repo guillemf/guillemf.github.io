@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Enterprise | Guillem Fernandez]]></title>
-  <link href="http://blog.guillem.mobi/blog/categories/enterprise/atom.xml" rel="self"/>
-  <link href="http://blog.guillem.mobi/"/>
-  <updated>2016-09-12T18:21:23+02:00</updated>
-  <id>http://blog.guillem.mobi/</id>
+  <link href="http://guillemf.github.io/blog/categories/enterprise/atom.xml" rel="self"/>
+  <link href="http://guillemf.github.io/"/>
+  <updated>2016-09-14T15:34:13+02:00</updated>
+  <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why Should a Company Develop an App]]></title>
-    <link href="http://blog.guillem.mobi/blog/2012/11/13/why-should-a-company-develop-an-app/"/>
+    <link href="http://guillemf.github.io/blog/2012/11/13/why-should-a-company-develop-an-app/"/>
     <updated>2012-11-13T22:30:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2012/11/13/why-should-a-company-develop-an-app</id>
+    <id>http://guillemf.github.io/blog/2012/11/13/why-should-a-company-develop-an-app</id>
     <content type="html"><![CDATA[<p>This is a question asked by many business leaders because of the big amount of apps that are coming to market daily while, also, probably their competitors have an <em>App</em> , with varying degrees of success, but have <em>App</em>.</p>
 
 <p>In a way the <em>Apps</em> are currently experiencing the same boom in the nineties lived web pages. During this period all companies wanted a website, they were unclear why or what for but they wanted web presence. This often ended up being counterproductive for companies since the image or experience offered to your potential customers did not always correspond with the reality of the company.</p>

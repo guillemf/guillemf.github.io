@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Opinion | Guillem Fernandez]]></title>
-  <link href="http://blog.guillem.mobi/blog/categories/opinion/atom.xml" rel="self"/>
-  <link href="http://blog.guillem.mobi/"/>
-  <updated>2016-09-12T18:21:23+02:00</updated>
-  <id>http://blog.guillem.mobi/</id>
+  <link href="http://guillemf.github.io/blog/categories/opinion/atom.xml" rel="self"/>
+  <link href="http://guillemf.github.io/"/>
+  <updated>2016-09-14T15:34:13+02:00</updated>
+  <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Welcome ... Back]]></title>
-    <link href="http://blog.guillem.mobi/blog/2014/06/04/welcome-back/"/>
+    <link href="http://guillemf.github.io/blog/2014/06/04/welcome-back/"/>
     <updated>2014-06-04T12:28:09+02:00</updated>
-    <id>http://blog.guillem.mobi/blog/2014/06/04/welcome-back</id>
+    <id>http://guillemf.github.io/blog/2014/06/04/welcome-back</id>
     <content type="html"><![CDATA[<p>This last year or so I&rsquo;ve been totally disconnected from social networking and blogging. Working has been the topic and family has been the focus after having a period where I was out all time and never enjoying them. Now things have changed and I had this last year or so to put things in the right place and come back again with renewed strength and the will of publishing my daily foundings, experiences, opinions and investigation. I really hope you all enjoy this blog, rebuilt, relocated and renewed.</p>
 
 <p>See you in the web!</p>
@@ -26,9 +26,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why Should a Company Develop an App]]></title>
-    <link href="http://blog.guillem.mobi/blog/2012/11/13/why-should-a-company-develop-an-app/"/>
+    <link href="http://guillemf.github.io/blog/2012/11/13/why-should-a-company-develop-an-app/"/>
     <updated>2012-11-13T22:30:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2012/11/13/why-should-a-company-develop-an-app</id>
+    <id>http://guillemf.github.io/blog/2012/11/13/why-should-a-company-develop-an-app</id>
     <content type="html"><![CDATA[<p>This is a question asked by many business leaders because of the big amount of apps that are coming to market daily while, also, probably their competitors have an <em>App</em> , with varying degrees of success, but have <em>App</em>.</p>
 
 <p>In a way the <em>Apps</em> are currently experiencing the same boom in the nineties lived web pages. During this period all companies wanted a website, they were unclear why or what for but they wanted web presence. This often ended up being counterproductive for companies since the image or experience offered to your potential customers did not always correspond with the reality of the company.</p>
@@ -79,9 +79,9 @@
   
   <entry>
     <title type="html"><![CDATA[Wellcome to My Blog]]></title>
-    <link href="http://blog.guillem.mobi/blog/2012/11/13/wellcome-to-my-blog/"/>
+    <link href="http://guillemf.github.io/blog/2012/11/13/wellcome-to-my-blog/"/>
     <updated>2012-11-13T21:28:00+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2012/11/13/wellcome-to-my-blog</id>
+    <id>http://guillemf.github.io/blog/2012/11/13/wellcome-to-my-blog</id>
     <content type="html"><![CDATA[<p>This is the first post and would like to introduce and present the blog, which is my goal, what will be the frequency with which I will post and how will it be related to the associated podcast.</p>
 
 <p>Lets begin with introductions. I am Guillem Fernández and as you can see on my home page, I&rsquo;ve been in the world of application development for some time. My professional life has taken me in various ways that have given me the opportunity to develop, manage teams, perform business tasks, management, recruitment and a lot of consultancy. Despite having had such different experiences, I have never stopped working as developer, sometimes as primary occupation and some others as a second job done on finish my main occupation.</p>

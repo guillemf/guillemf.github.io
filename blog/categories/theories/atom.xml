@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Swift | Guillem Fernandez]]></title>
-  <link href="http://guillemf.github.io/blog/categories/swift/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Theories | Guillem Fernandez]]></title>
+  <link href="http://guillemf.github.io/blog/categories/theories/atom.xml" rel="self"/>
   <link href="http://guillemf.github.io/"/>
   <updated>2016-09-14T15:34:13+02:00</updated>
   <id>http://guillemf.github.io/</id>

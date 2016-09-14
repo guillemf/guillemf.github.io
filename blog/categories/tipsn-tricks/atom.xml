@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tips'n'tricks | Guillem Fernandez]]></title>
-  <link href="http://blog.guillem.mobi/blog/categories/tipsn-tricks/atom.xml" rel="self"/>
-  <link href="http://blog.guillem.mobi/"/>
-  <updated>2016-09-12T18:21:23+02:00</updated>
-  <id>http://blog.guillem.mobi/</id>
+  <link href="http://guillemf.github.io/blog/categories/tipsn-tricks/atom.xml" rel="self"/>
+  <link href="http://guillemf.github.io/"/>
+  <updated>2016-09-14T15:34:13+02:00</updated>
+  <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[MFMailComposeViewController Nightmare]]></title>
-    <link href="http://blog.guillem.mobi/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare/"/>
+    <link href="http://guillemf.github.io/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare/"/>
     <updated>2015-01-23T10:30:03+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare</id>
+    <id>http://guillemf.github.io/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve just gone through MFMailComposeViewController because I had a problem with the look&amp;feel of the Cancel and Save buttons on the mail compose dialog toolbar. They just looked too, how to say, transparent. The problem was that in the app I am working on I use appearance proxy. That seemed not to work with MFMailComposeViewController.</p>
 
 <!-- more -->
@@ -75,9 +75,9 @@
   
   <entry>
     <title type="html"><![CDATA[iOS 7 and iOS 8 Living Together]]></title>
-    <link href="http://blog.guillem.mobi/blog/2015/01/20/ios-7-and-ios-8-living-together/"/>
+    <link href="http://guillemf.github.io/blog/2015/01/20/ios-7-and-ios-8-living-together/"/>
     <updated>2015-01-20T19:02:10+01:00</updated>
-    <id>http://blog.guillem.mobi/blog/2015/01/20/ios-7-and-ios-8-living-together</id>
+    <id>http://guillemf.github.io/blog/2015/01/20/ios-7-and-ios-8-living-together</id>
     <content type="html"><![CDATA[<p>This is the first post of 2015. I want to start it with a new category, Tips and Tricks. I&rsquo;ve found that in my daily work I am fixing many different small pieces of code that, in some cases, will be interesting for you, so I decided to share it in my blog.</p>
 
 <p>The firs one is how to include code that behaves differently when it&rsquo;s running on iOS 7 than when it&rsquo;s running on iOS 8, for example. I&rsquo;ve found two main different ways to do it.</p>
