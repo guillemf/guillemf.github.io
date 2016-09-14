@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>BDD - Mastermind : View Preparation to Make the UI Testable - Guillem Fernandez</title>
+  <meta name="author" content="Guillem Fernandez">
+
+  
+  <meta name="description" content="This is the fourth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Guillem Fernandez" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+<!--- MathJax Configuration -->
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-52623021-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   class="collapse-sidebar sidebar-footer" >
+  <header role="banner"><hgroup>
+  <h1><img src="/images/Logo64.png" height="64" width="64"/ id="header-logo"><a href="/">Guillem Fernandez</a></h1>
+  
+    <h2>About my job and my passion.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+  
+  
+<ul class="subscription">
+  <li><a href="http://delicious.com/guillemf" rel="subscribe-delicious" title="Delicious Bookmarks">Delicious</a></li>
+</ul>
+  
+  
+  
+<ul class="subscription">
+  <li><a href="https://github.com/guillemf" rel="subscribe-github" title="@guillemf on GitHub">GitHub</a></li>
+</ul>
+  
+  
+  
+<ul class="subscription">
+  <li><a href="https://bitbucket.org/guillemfg" rel="subscribe-bitbucket" title="@guillemfg on Bitbucket">Bitbucket</a></li>
+</ul>
+  
+  
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.guillem.mobi" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/profile">About</a></li>
+  <li><a href="/porfolio">Porfolio</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      
+        <h1 class="entry-title">BDD - Mastermind : View Preparation to Make the UI Testable</h1>
+      
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-10-21T17:43:42+02:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>5:43 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This is the fourth post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/" title="BDD - Mastermind : TDD in the Model">here</a>.</p>
+
+<p>If you thought we were going to jump straight to BDD I&rsquo;m afraid you&rsquo;ll have to wait a little more. To understand it, first of all I&rsquo;m going to explain which is the framework I decided to use to BDD and how does it work. With all that info you&rsquo;ll understand why we need to prepare the things to be able to BDD.</p>
+
+<p>You can find the code corresponding to this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_5" title="MasterMind-BDD Step5">this commit</a>. Go and get it!</p>
+
+<!-- more -->
+
+
+<h1>Calabash</h1>
+
+<h4>AUTOMATED ACCEPTANCE TESTING FOR MOBILE APPS</h4>
+
+<p>If you go to <a href="http://calaba.sh" title="Automated Acceptance Testing for iOS and Android Apps">calabash web site</a> you&rsquo;ll find this definition.</p>
+
+<blockquote><p>Calabash enables you to write and execute automated acceptance tests of mobile apps. Calabash is cross-platform, supporting Android and iOS native apps. It is open source and free, and has a company, Xamarin, backing and developing it.</p></blockquote>
+
+<p>The reasons I decided to go with calabash after some investigation and research are diverse. First of all was the ease of integrating it in your projects. Opposite to other platforms it is just a question of a few sentences to be able to integrate it. Second, it works with <em>cucumber</em>. I really love cucumber as a way to interface with non technical people and be able to understand the same things and write acceptance criterias that we both understand and agree, and more important, we can convert them in tests.</p>
+
+<p>When you are done with this post, never before ;), you can go to <a href="https://github.com/calabash/calabash-ios" title="calabash-ios github repository">github calabash iOS repository</a> and read how to install the gem and integrate it in your projects so you are able to follow the steps of this series of posts while you build your own, secure and testable app.</p>
+
+<p>What&rsquo;s more important to understand in this post is that calabash works with the accessibility labels to inspect and perform tasks on the simulator and the device. That&rsquo;s the reason why we can&rsquo;t go straight to the tests when we are going to create an app that contains a bunch of custom views and we need to see if that view is red, blue, green or yellow for example. Sadly this is something we can&rsquo;t get out of the box by now. But the good news are that we can create a view that is testable in that way.</p>
+
+<h2>Creating Testable Views - TDD to the rescue</h2>
+
+<p>First thing we need to do is to convert what is a view perception into an accessible label. How are we going to do it? Keep reading and you&rsquo;ll know how.</p>
+
+<p>As usual we&rsquo;ll start by creating a test file to test what I decided to call MMCell.</p>
+
+<p>The strategy used to create a view that behaves as we want it to behave visually when we can&rsquo;t test that it really happens is to break it in to parts. One is tested with TDD and ensures that when setting properties on a view the visual changes happens as we expect. The other part is that those visual changes are expressed in a simple way in the accessibility label.</p>
+
+<p>To do it we&rsquo;ll use two properties.</p>
+
+<ul>
+<li><strong>bezierPath</strong> : This is a <em>readonly</em> property that will reflect the shape that is going to be drawn in the view. This we can verify what is being drawn in the view.</li>
+<li><strong>color</strong> : This is a property to allow the app set the color of the circle that&rsquo;s going to be shown in the view.</li>
+</ul>
+
+
+<p>To better understand how we are going to make it, let&rsquo;s take a look at the first test:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testWhenSizeChangesPathSizeChanges</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">width</span> <span class="o">=</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+</span><span class='line'>    <span class="kt">int</span> <span class="n">height</span> <span class="o">=</span> <span class="n">arc4random_uniform</span><span class="p">(</span><span class="mi">200</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cell</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">);</span>
+</span><span class='line'>    <span class="bp">UIBezierPath</span> <span class="o">*</span><span class="n">expectedBezier</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIBezierPath</span> <span class="nl">bezierPathWithOvalInRect</span><span class="p">:</span><span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">XCTAssertTrue</span><span class="p">(</span><span class="n">CGPathEqualToPath</span><span class="p">([</span><span class="n">expectedBezier</span> <span class="bp">CGPath</span><span class="p">],</span> <span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">bezierPath</span> <span class="bp">CGPath</span><span class="p">]),</span>
+</span><span class='line'>                  <span class="s">@&quot;Bezier Path does not match expected shape&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The test is very simple. We get a random height and a random width, both between 0 and 200, and check that when we set the frame of the view the path generated matches what we expect. This doesn&rsquo;t guarantees that this is what is going to be drawn. To do it we need to go one step forward.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testFillIsCalledOnBezierPathWhenDrawRectIsCalled</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">id</span> <span class="n">bezierMock</span> <span class="o">=</span> <span class="n">OCMPartialMock</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">bezierPath</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">OCMStub</span><span class="p">([</span><span class="n">bezierMock</span> <span class="n">fill</span><span class="p">]).</span><span class="n">andForwardToRealObject</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">cell</span> <span class="nl">drawRect</span><span class="p">:</span><span class="n">cell</span><span class="p">.</span><span class="n">bounds</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">OCMVerify</span><span class="p">([</span><span class="n">bezierMock</span> <span class="n">fill</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This test what basically does is to check if, when drawRect is called also fill is called on bezierPath object. To do it I use one of the best friends you can have when TDDing, <strong>Mocks</strong>. Sadly this is something that is not natively implemented in XCTest, so we need to find third party developments to use it. There are different libraries that implement mocks for iOS. In this case I decided to choose <a href="http://ocmock.org/" title="OCMock Web Site">OCMock</a> which is a very well known and tested libraries, but <a href="https://github.com/jonreid/OCMockito" title="OCMockito GitHub Page">OCMockito</a> is also an excellent option.</p>
+
+<p>Basically a mock is an object that &ldquo;replaces&rdquo; totally or partially the object you are trying to test or an object you want to behave in a certain way so you check what happens or make things happen in a controlled environment.</p>
+
+<p>I know this sounds a little weird, so if you want me to write a full post about Mocking in iOS, please ask me for it in the comments or twitter and I&rsquo;ll prepare it.</p>
+
+<p>This is a good moment to introduce another player that will join you projects very often.</p>
+
+<h1>CocoaPods</h1>
+
+<p>If you are already familiar with CocoaPods you can jump straight to <a href="#testinwhatitlookslike">Testing what it looks like</a>.</p>
+
+<p>In <a href="http://cocoapods.org" title="CocoaPods Web Site">CocoaPods Web Site</a> they define themselves as</p>
+
+<blockquote><p>CocoaPods is the dependency manager for Objective-C projects. It has thousands of libraries and can help you scale your projects elegantly.</p></blockquote>
+
+<p>I would add to it that they do it in an <em>awesome and very clean way</em>.</p>
+
+<p>Until I discovered CocoaPods I needed to include, organize and maintain third party developments manually. CocoaPods let&rsquo;s you do it all in a very clean and isolated way so you can start using the those libraries in less than five minutes.</p>
+
+<p>Let&rsquo;s see how to do it in our case.</p>
+
+<p>You have a very complete instruction set in <a href="http://cocoapods.org" title="CocoaPods Web Site">CocoaPods Web Site</a> but basically is three steps.</p>
+
+<ol>
+<li>Install the gem with <em>sudo gem install cocoapods</em>.</li>
+<li>Create a file named &ldquo;<em>Podfile</em>&rdquo; in the same folder you have your .xcodeproj file and include the information you need in it.</li>
+<li>Run <em>pod install</em> from the terminal in that folder.</li>
+</ol>
+
+
+<p>After those three simple steps you&rsquo;ll have a new .xcworkspace file with two projects in it, one your project and the other the project to build the pods library.</p>
+
+<p>From this point you just need to include the pod header you need in each file you need it. In this case by now I just need to include <strong>&lt;OCMock/OCMock.h></strong> in the Test File.</p>
+
+<p>The content of this first version of the Podfile is the following.</p>
+
+<pre><code>source 'https://github.com/CocoaPods/Specs.git'
+
+platform :ios, '8.0'
+
+xcodeproj 'MasterMind'
+
+target :MasterMindTests do
+    pod 'OCMock', '~&gt; 3.1.1'
+end
+</code></pre>
+
+<p>Note that I added the pod only to the Test target, that means this pod won&rsquo;t be available in release target, which is what we want.</p>
+
+<h1>Testing what it looks like<a name="testinwhatitlookslike"></a></h1>
+
+<p>We need to do the same we&rsquo;ve done with bezierPath with color so we ensure that &ldquo;<em>setFill</em>&rdquo; is called on color property when &ldquo;<em>drawRect</em>&rdquo; is called on the view.</p>
+
+<p>This test will make it.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testSetFillIsCalledOnColorWhenDrawRectIsCalled</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">id</span> <span class="n">colorMock</span> <span class="o">=</span> <span class="n">OCMPartialMock</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">color</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">OCMStub</span><span class="p">([</span><span class="n">colorMock</span> <span class="n">setFill</span><span class="p">]).</span><span class="n">andForwardToRealObject</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="n">cell</span> <span class="nl">drawRect</span><span class="p">:</span><span class="n">cell</span><span class="p">.</span><span class="n">bounds</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">OCMVerify</span><span class="p">([</span><span class="n">colorMock</span> <span class="n">setFill</span><span class="p">]);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point we know the properties are set, updated on changes, called SetNeedsDiplay to request redraw ( look at the code ) and we are sure that they are called when drawRect is called, but how can we ensure the last result is what we expect to be. There are many ways to do it so here is what I suggest in this case. Remember I&rsquo;m not trying to be exhaustive in this series but create an exercise to show you all the possibilities we have so far to test an app.</p>
+
+<p>The best way to let the test see if the final result is what we want is compare it with an image that represents what we want, so that&rsquo;s what we are going to do. In this case I took some images that represents what the view should look like in different circumstances. Those are:</p>
+
+<table>
+    <tr>
+        <td><img src = "https://farm6.staticflickr.com/5610/15597069961_c34ebc6b67_o.png"/></td>
+        <td><img src = "https://farm6.staticflickr.com/5597/15413734867_80e3391e9f_o.png"/></td>
+        <td><img src = "https://farm4.staticflickr.com/3953/15413114649_192d2a1f54_o.png"/></td>
+        <td><img src = "https://farm4.staticflickr.com/3944/15413734757_cf408a786c_o.png"/></td>
+    </tr>
+</table>
+
+
+<p>Now, how to check the view against the image? This is the test.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">testViewMatchesExpectedImage</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">cell</span><span class="p">.</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="bp">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+</span><span class='line'>    <span class="n">cell</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="bp">NSString</span><span class="o">*</span> <span class="n">fileImageName</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">NSBundle</span> <span class="nl">bundleForClass</span><span class="p">:[</span><span class="nb">self</span> <span class="k">class</span><span class="p">]]</span> <span class="nl">pathForResource</span><span class="p">:</span><span class="s">&quot;testImageRed&quot;</span> <span class="nl">ofType</span><span class="p">:</span><span class="s">@&quot;png&quot;</span><span class="p">];</span>
+</span><span class='line'>    <span class="bp">UIImage</span> <span class="o">*</span><span class="n">fileImageObj</span> <span class="o">=</span> <span class="p">[[</span><span class="bp">UIImage</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithContentsOfFile</span><span class="p">:</span><span class="n">fileImageName</span><span class="p">];</span>
+</span><span class='line'>    <span class="bp">UIImage</span> <span class="o">*</span><span class="n">expectedImage</span> <span class="o">=</span> <span class="n">UIImagePNGRepresentation</span><span class="p">(</span><span class="n">fileImageObj</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">UIGraphicsBeginImageContext</span><span class="p">(</span><span class="n">cell</span><span class="p">.</span><span class="n">bounds</span><span class="p">.</span><span class="n">size</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">cell</span><span class="p">.</span><span class="n">layer</span> <span class="nl">renderInContext</span><span class="p">:</span><span class="n">UIGraphicsGetCurrentContext</span><span class="p">()];</span>
+</span><span class='line'>    <span class="bp">UIImage</span><span class="o">*</span> <span class="n">image1</span> <span class="o">=</span> <span class="n">UIGraphicsGetImageFromCurrentImageContext</span><span class="p">();</span>
+</span><span class='line'>    <span class="n">UIGraphicsEndImageContext</span><span class="p">();</span>
+</span><span class='line'>    <span class="bp">UIImage</span> <span class="o">*</span><span class="n">viewImage</span><span class="o">=</span>  <span class="n">UIImagePNGRepresentation</span><span class="p">(</span><span class="n">image1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">XCTAssertEqualObjects</span><span class="p">(</span><span class="n">viewImage</span><span class="p">,</span> <span class="n">expectedImage</span><span class="p">,</span> <span class="s">@&quot;View should look like the image&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The base is that we obtain the NSData representation of both images and we compare them, that will tell us if they match or doesn&rsquo;t.</p>
+
+<p>And that&rsquo;s all for now. Now we have testable view cells. We need testable result cells and then we can start with BDD.</p>
+
+<p>Remember you can find the code of this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_5" title="MasterMind-BDD Step5">this commit</a>.</p>
+
+<p>If you like it, please share! If you believe there is some part that needs more detail or want to suggest a new post like with Mocking, just send me your thoughts.</p>
+
+<p>Thank you for reading me.</p>
+
+<p>In the next post <a href="/blog/2014/11/10/bdd-mastermind-view-preparation/" title="BDD - Mastermind : View Preparation">BDD - Mastermind : View Preparation</a> we&rsquo;ll find a more robust and maintainable way to create tests for the visual aspect.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+
+
+  <span class="byline author vcard">Authored by <span class="fn">
+  
+    Guillem Fernandez
+  
+  </span></span>
+
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-10-21T17:43:42+02:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>5:43 pm</span></time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bdd/'>bdd</a>, <a class='category' href='/blog/categories/development/'>development</a>, <a class='category' href='/blog/categories/tdd/'>tdd</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/" data-via="guillemfg" data-counturl="http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-layout="button_count" data-send="false" data-width="300" data-show-faces="false"></div>
+  
+  
+    <script src="//platform.linkedin.com/in.js" type="text/javascript">
+    lang: en_US
+	</script>
+  	<script type="IN/Share" data-counter="right"></script>
+  
+ </div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/" title="Previous Post: BDD - Mastermind : TDD in the model">&laquo; BDD - Mastermind : TDD in the model</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/11/10/bdd-mastermind-view-preparation/" title="Next Post: BDD - Mastermind : View preparation">BDD - Mastermind : View preparation &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+
+</div>
+
+<aside class="sidebar">
+  
+    
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Guillem Fernandez -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a> | Themed with <a href="https://github.com/lucaslew/whitespace">Whitespace</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'guillemfernandez';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/';
+        var disqus_url = 'http://blog.guillem.mobi/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Enterprise | Guillem Fernandez]]></title>
+  <link href="http://blog.guillem.mobi/blog/categories/enterprise/atom.xml" rel="self"/>
+  <link href="http://blog.guillem.mobi/"/>
+  <updated>2016-09-12T18:21:23+02:00</updated>
+  <id>http://blog.guillem.mobi/</id>
+  <author>
+    <name><![CDATA[Guillem Fernandez]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Why Should a Company Develop an App]]></title>
+    <link href="http://blog.guillem.mobi/blog/2012/11/13/why-should-a-company-develop-an-app/"/>
+    <updated>2012-11-13T22:30:00+01:00</updated>
+    <id>http://blog.guillem.mobi/blog/2012/11/13/why-should-a-company-develop-an-app</id>
+    <content type="html"><![CDATA[<p>This is a question asked by many business leaders because of the big amount of apps that are coming to market daily while, also, probably their competitors have an <em>App</em> , with varying degrees of success, but have <em>App</em>.</p>
+
+<p>In a way the <em>Apps</em> are currently experiencing the same boom in the nineties lived web pages. During this period all companies wanted a website, they were unclear why or what for but they wanted web presence. This often ended up being counterproductive for companies since the image or experience offered to your potential customers did not always correspond with the reality of the company.</p>
+
+<p>Therefore I&rsquo;ll try to explain what are, from my point of view, the reasons that should lead a company to have a <em>App</em> and what should be avoided in order to not end that <em>App</em> causing the opposite effect to that intended to obtain a principle.</p>
+
+<h1>Communication with the end Customer</h1>
+
+<p>The mechanisms of communication with customers are becoming more vital aspects that the company must seriously consider and that will let one transmit a series of values, brand image and provide a closeness that is currently too expensive, slow or sometimes unapproachable.</p>
+
+<p>A clear advantage that certainly provides a channel of communication with the end customer is the ability to transmit in a fast, clear and direct way those innovations, products, promotions or any specific or special communication that seeks to spread. Keep in mind that this immediacy and ease is often a double-edged sword because the barrier between promotion and spam is very thin and is therefore a mechanism to be used properly and carefully studied.</p>
+
+<p>While communication is important in that sense, we should not forget all communication obtained in the opposite direction, from the customer to the company. To know which are the main time of consumption, acquisition or use of the services is information that can be of great use, not only for its informative trend but for its immediacy, we could say that we get information &ldquo;in real time&rdquo; since an <em>App</em> allows users consume the product or service at the moment they want and not when it happens to have a front desk.</p>
+
+<h1>Facilitate tasks with Suppliers</h1>
+
+<p>If on one hand the company a company has customers, on which they have more dependency than control, on the other has suppliers on which it can possibly have more control or pressure.</p>
+
+<p>One of the big problems with suppliers is the diversity of methods, documents and applications they use for communicate.</p>
+
+<p>In this aspect a <em>App</em> can provide a system by which providers can have a real knowledge of supply needs, a system for receiving orders and a that these should be formulated and introduced in a standardized way for the company.</p>
+
+<h1>Customers Loyalty and facilitation of tasks</h1>
+
+<p>If the reasons previously commented, perhaps more obvious,were focused on an end customer oriented <em>App</em>, there are many reasons that apply to commercial customers, customers who process the product offered or simply intermediaries. Some of these reasons could apply to retail customers, however I&rsquo;ve decided include them here because I consider that professional customer will probably claim more for them.</p>
+
+<p>Providing customer <em>App</em> that allows automatic or semiautomatic orders based on parameters, allows the company to better planning. An <em>App</em> that provides a report of changes in stock and could perform based on certain parameters to issue an automatic order through this same <em>App</em>, can be a competitive advantage over other companies by enabling customers greater control about their stocks and even maintain a lower volume of product stored.</p>
+
+<p>At the same time an <em>App</em> can inform at realtime about promotions at the moment of ordering.</p>
+
+<p>All these advantages, that anyone could think that may be present from a desktop terminal, must be considered in a different way as lets the customer to have them without the need of any infrastructure or fixed localization . Equipping the terminal with a bar code reader can even place orders for replacement even more dynamic.</p>
+
+<h1>More realistic activity control</h1>
+
+<p>As I said before the fact of having an instrument, an extension of the company in the hands of the end user provides endless possibilities of information and &ldquo;control&rdquo;. Usage statistics and actual consumption of services and real customer distributions. Customer reactions to the introduction of new products or changes in the products and services offered. An increase in sales through the mobile channel can be detected in an extremely agile way, and connected with an appropriate knowledge management system can to provide real-time information and therefore provide for an adequate reaction time.</p>
+
+<p>At the level of the internal sales force may be more appropriate to give an example to list advantages. Several companies are already using iPads so that your sales force only needs a small device to place orders, check inventory, report activity or business planning daily, weekly or monthly or hot zone maps optimized route suggestions that can be updated as the activity is performed daily.</p>
+
+<h1>Increase Client Portfolio</h1>
+
+<p>Finally, one of the most important and probably the reason the end of activity, increasing customer base and hence sales. Entering the App Store now means placed at a potential market of over 200 million users worldwide. That&rsquo;s a big advantage or it can be a big mistake if not done in the right way and rushing the project with the required dedication.</p>
+
+<p>Develop a <em>App</em> or not depends on many more reasons, these are just a few, but it is always one constant is that the company that starts a project should be aware that is his image that will be projected at about 200 million users, and the programmer who develops the <em>App</em> will not be the one to suffer the consequences of poor or inadequate <em>Apps</em>. That is why it is so important deciding to make the development as finding the professional development perform. In future posts I will discuss how to approach the development of <em>App</em>, what are the requirements for a company to develop an <em>App</em> or what is the cost of developing it.</p>
+
+<p>I hope this post has been helpful and I invite you to send comments or suggestions that you may believe as about the post.</p>
+]]></content>
+  </entry>
+  
+</feed>

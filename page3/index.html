@@ -9,8 +9,7 @@
   <meta name="author" content="Guillem Fernandez">
 
   
-  <meta name="description" content="Back again
-">
+  <meta name="description" content="This is the third post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.guillem.mobi">
+  <link rel="canonical" href="http://blog.guillem.mobi/page3">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Guillem Fernandez" type="application/atom+xml">
@@ -107,7 +106,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2016/09/08/what-is-the-status-of-bdd-in-swift/">What Is the Status of BDD in Swift</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/">BDD - Mastermind : TDD in the Model</a></h1>
     
     
       <p class="meta">
@@ -116,49 +115,35 @@
 
 
 
-<time class='entry-date' datetime='2016-09-08T17:31:12+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:31 pm</span></time>
+<time class='entry-date' datetime='2014-09-29T17:06:51+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:06 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Back again</p>
-</div>
-  
-  
+  <div class="entry-content"><p>This is the third post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/" title="BDD: From the Idea to the App 2">here</a>.</p>
 
+<p>It&rsquo;s time to get your hands dirty. To make it really easy I&rsquo;ve decided to tag each relevant commit with step numbers so you can follow step by step the process. I recommend you to code your own version, but if at some point you are lost, just checkout the step where you got lost and we&rsquo;ll be synchronized again.</p>
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare/">MFMailComposeViewController Nightmare</a></h1>
-    
-    
-      <p class="meta">
-        
+<p>First thing to do is create your project and have it ready to run. You can create a new project or checkout <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_1" title="MasterMind-BDD Step1">this commit</a> or just checkout from terminal by :</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>git clone git@github.com:guillemf/Mastermind-BDD.git
+</span><span class='line'>git tag -l
+</span><span class='line'>git checkout tags/Step_1.
+</span></code></pre></td></tr></table></div></figure>
 
 
 
-
-<time class='entry-date' datetime='2015-01-23T10:30:03+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>23</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>10:30 am</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve just gone through MFMailComposeViewController because I had a problem with the look&amp;feel of the Cancel and Save buttons on the mail compose dialog toolbar. They just looked too, how to say, transparent. The problem was that in the app I am working on I use appearance proxy. That seemed not to work with MFMailComposeViewController.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2015/01/23/mfmailcomposeviewcontroller-nightmare/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2014/09/29/bdd-mastermind-tdd-in-the-model/">Read on &rarr;</a>
     </footer>
   
 
@@ -170,7 +155,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/01/20/ios-7-and-ios-8-living-together/">iOS 7 and iOS 8 Living Together</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/09/25/bdd-mastermind-internal-design/">BDD - Mastermind : Internal Design</a></h1>
     
     
       <p class="meta">
@@ -179,22 +164,60 @@
 
 
 
-<time class='entry-date' datetime='2015-01-20T19:02:10+01:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:02 pm</span></time>
+<time class='entry-date' datetime='2014-09-25T19:14:18+02:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:14 pm</span></time>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>This is the first post of 2015. I want to start it with a new category, Tips and Tricks. I&rsquo;ve found that in my daily work I am fixing many different small pieces of code that, in some cases, will be interesting for you, so I decided to share it in my blog.</p>
+  <div class="entry-content"><p>This is the second post to create an application using BDD and TDD in iOS. If you missed the first post, my recommendation is that you read it first <a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/" title="BDD: From the Idea to the App 2">here</a>.</p>
 
-<p>The firs one is how to include code that behaves differently when it&rsquo;s running on iOS 7 than when it&rsquo;s running on iOS 8, for example. I&rsquo;ve found two main different ways to do it.</p>
+<p>In this post we are going to walk through the process of designing how we are going to architecture it internally and start writing down the first specifications that later on will become tests. I decided to structure it the way a &ldquo;non technical&rdquo; person would describe what she wants and then move it to the world of Unit Testing and Acceptance Tests.</p>
 
 </div>
   
   
     <footer>
-      <a rel="full-article" href="/blog/2015/01/20/ios-7-and-ios-8-living-together/">Read on &rarr;</a>
+      <a rel="full-article" href="/blog/2014/09/25/bdd-mastermind-internal-design/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/">BDD: From the Idea to the App 2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-08-20T19:08:52+02:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>7:08 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>It&rsquo;s been almost two years since I wrote my post from the idea to the App, and that&rsquo;s a long time. Since then many things changed and I&rsquo;ve been working a lot on BDD and TDD. So I guess this is a great moment to start a new series of posts about how to do the full process.</p>
+
+<p>Last year I did a formation on iOS development. The final lessons consisted in creating a game, the Mastermind game. I think it is a good idea to use this example to build and app using TDD and BDD. Of course this process will not contain the full creation process with all details as it would take ages, even a book to do it, but I will include the headlines of the process with all the details and guides to complete the process, and of course with the code to do it.</p>
+
+<p>Let&rsquo;s start with it.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/">Read on &rarr;</a>
     </footer>
   
 
@@ -203,9 +226,11 @@
   
   <div class="pagination">
     
-      <a class="prev" href="/page2">&larr; Older</a>
+      <a class="prev" href="/page4">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/page2">Newer &rarr;</a>
     
   </div>
 </div>
