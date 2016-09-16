@@ -4,7 +4,7 @@
   <title><![CDATA[Guillem Fernandez]]></title>
   <link href="http://guillemf.github.io/atom.xml" rel="self"/>
   <link href="http://guillemf.github.io/"/>
-  <updated>2016-09-14T15:34:13+02:00</updated>
+  <updated>2016-09-16T18:46:25+02:00</updated>
   <id>http://guillemf.github.io/</id>
   <author>
     <name><![CDATA[Guillem Fernandez]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[And Now What?]]></title>
+    <link href="http://guillemf.github.io/blog/2016/09/16/and-now-what/"/>
+    <updated>2016-09-16T18:43:10+02:00</updated>
+    <id>http://guillemf.github.io/blog/2016/09/16/and-now-what</id>
+    <content type="html"><![CDATA[<p>Once again I am there in that situation, you know, finishing the current contract and thinking about what&rsquo;s coming next.
+This usually happens once a year or six months, depending on the contract, but this time I&rsquo;ve been working for the same company for almost two years.</p>
+
+<p>To be fair I need some fresh air, but at the same time I&rsquo;m pretty tired having to look for a new project.</p>
+
+<p>First things first, I started by updating my CV, my website, doing some housekeeping on my github repos and starting to post some new things to make some advertising.</p>
+
+<p>As usual I&rsquo;ve started by reviewing the typical web sites and applying for those job offers I believe could be interesting, sending emails to the agencies I&rsquo;ve worked for before and telling my friends and colleagues that I am &lsquo;open to new opportunities&rsquo;.</p>
+
+<p>But then the worse part of all this situation comes in. I started receiving every day up to five emails from agencies. Most of them didn&rsquo;t even take five minutes to read my profile or the email I sent them, which I took my time to write hoping it would help on filtering what I was going to receive, but no, that was not the case.</p>
+
+<p>Of those that matched my profile, casually or by reading it, many of them are urgent and almost all have these things in common:</p>
+
+<ul>
+<li>It&rsquo;s going to be the next social media cracking app.</li>
+<li>An amazing project with young and dynamic people.</li>
+<li>Working with the most advanced technologies.</li>
+<li>The next generation app.</li>
+</ul>
+
+
+<p>Some of them contained very different font types between paragraphs, which clearly means a copy and paste from a previous email or document. Even a couple of them were for a different person or at least my name was not in the email but another one&rsquo;s was. Also most of them were looking for permanent positions, and that&rsquo;s something I&rsquo;d like to avoid if possible, I love to work as freelance.</p>
+
+<p>They all looked like a factory with no interest in the quality of the product or the offer.</p>
+
+<p>With a few good exceptions which I keep in my records, the rest are not of my interest or at least aren&rsquo;t what I need to have the future I want to have.</p>
+
+<p>At this point I realised that something was going really bad. That was not the way and there should be better, different way to find the next project.</p>
+
+<p>After some enquiries, a friend of mine told me about <a href="http://www.toptal.com">Toptal</a>. He told me that it&rsquo;s a company that does it differently.</p>
+
+<p>I took some time to make my investigations and they seem to be the answer. The first thing they do different is the kind of questions they ask to start applying. No silly and unrelated questions, no filling questions with no sense, just the right questions. That form is destined to be the starting point for an interview, not to opt to a position but to opt to be part of the team, the pool of engineers.</p>
+
+<p>That seems to be a new way of doing things and ensuring only the best engineers are part of it.</p>
+
+<p>I don&rsquo;t know how this new adventure is going to end, but I promise you to write a following post telling you what happened and what the experience has been for me.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[What Is the Status of BDD in Swift]]></title>
@@ -1761,33 +1805,6 @@ Let&rsquo;s begin by revisiting the most important design pattern used in iOS De
 <p>At the end of the chapter the reveal a great &lsquo;utility&rsquo; for your terminal that will make you love this video just for it and you&rsquo;ll use for sure in your daily basis work, and not only that, they show you where to get more like them. Take a look at it, it&rsquo;s worth it.</p>
 
 <p>This post belongs to a series about <a href="http://shop.oreilly.com/product/110000007.do">Mac OS X Productivity Tips for Developers</a>. Next post will be about Source Control Assistants.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[O'Reilly Media Videos]]></title>
-    <link href="http://guillemf.github.io/blog/2014/07/02/oreilly-media-videos/"/>
-    <updated>2014-07-02T08:24:40+02:00</updated>
-    <id>http://guillemf.github.io/blog/2014/07/02/oreilly-media-videos</id>
-    <content type="html"><![CDATA[<h2>Mac OS X Productivity Tips for Developers</h2>
-
-<p><img class="left" src="https://farm4.staticflickr.com/3918/14552849031_7dbb387ef1_n.jpg" width="227" height="340" title="Mac OS X Productivity Tips for Developers" alt="Mac OS X Productivity Tips for Developers"></p>
-
-<p>I am a big fan of O&#8217;Reilly Media products because of their quality and the real value added that I usually get as a professional. In the past I acquired some of the videos like <a href="http://shop.oreilly.com/product/0636920017462.do">Mastering Git</a> or <a href="http://shop.oreilly.com/product/0636920024774.do">Mastering Advanced Git</a> , which I highly recommend if you are a Git user, and I found they are impressive easy to follow, immediate to apply and in return you get a huge increase of you expertise and so a good competitive advantage.</p>
-
-<p>Some time ago I discovered a new video from O&#8217;Reilly called <a href="http://shop.oreilly.com/product/110000007.do">Mac OS X Productivity Tips for Developers</a> and I almost immediately wanted to buy it and start getting all that included tips and tricks to use them in my daily tasks as developer.</p>
-
-<p>I normally take advantage of the &ldquo;<em>Deal of the day</em>&rdquo; or &ldquo;<em>Deal of the week</em>&rdquo; at O&#8217;Reilly, and I though that this was going to be a good candidate to wait for. Today, I finally got the luck to be able to access to it thanks to O&#8217;Reilly, and I really believe that in return of their attitude it is fair to share my thoughts and opinions about this video that might encourage some of you to buy it.</p>
-
-<p>To do that my compromise is to post an opinion about each of the chapters or group of chapters you can find in the video, this first post is about first chapter.</p>
-
-<h2>Keyboard Hacks</h2>
-
-<p>This first video has been like opening a window and letting some fresh air come in. As you might know I am iOS Developer. I spend most of my day in front of my computer pressing the keys and looking at the monitor all time. Some time ago I had a tendinitis in my right hand I my doctor said it was because of an excessive use of the mouse. After that I bought a trackpad to try to alternate and so reduce the pain and the risk of another injury.</p>
-
-<p>In this video you&rsquo;ll find some tricks to keep your fingers on the keyboard to do those kind of tasks you repeat hundreds of times every day and makes you use the mouse/trackpad with the subsequent lose of time and risk of stressing your wrist too much and end having a tendinitis.</p>
-
-<p>I really believe this is a good bunch of tips and tricks to incorporate to your daily routine. Let&rsquo;s see what more has it inside to help me.</p>
 ]]></content>
   </entry>
   

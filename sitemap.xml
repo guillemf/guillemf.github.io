@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://guillemf.github.io/blog/2016/09/16/and-now-what/</loc>
+<lastmod>2016-09-16T18:43:10+02:00</lastmod>
+</url>
+<url>
 <loc>http://guillemf.github.io/blog/2016/09/08/what-is-the-status-of-bdd-in-swift/</loc>
 <lastmod>2016-09-08T17:31:12+02:00</lastmod>
 </url>
@@ -157,6 +161,9 @@
 </url>
 <url>
 <loc>http://guillemf.github.io/blog/categories/theories/</loc>
+</url>
+<url>
+<loc>http://guillemf.github.io/blog/categories/work/</loc>
 </url>
 <url>
 <loc>http://guillemf.github.io/page2/</loc>
