@@ -1,0 +1,631 @@
+<!DOCTYPE HTML>
+<html lang="en" >
+    <head><meta charset="UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"><title>BDD - Mastermind : TDD in the model · Guillem Efege</title><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="description" content="Guillem Fernandez's professional web site From Developer for Developers. About Soft Skills and Hard Skills
+"><meta name="generator" content="Jekyll (using style of GitBook 3.2.3)"><meta name="author" content="Guillem Efegé"><link rel="stylesheet" href="/assets/gitbook/style.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-back-to-top-button/plugin.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-expandable-chapters-small2/expandable-chapters-small.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-fontsettings/website.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-search-pro/search.css">
+<link rel="stylesheet" href="/assets/gitbook/gitbook-plugin-splitter/splitter.css">
+
+<link rel="stylesheet" href="/assets/gitbook/rouge/colorful.css">
+
+<link rel="stylesheet" href="/assets/gitbook/custom.css">
+<link rel="stylesheet" href="/assets/gitbook/custom-local.css">
+
+<meta name="HandheldFriendly" content="true"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/gitbook/images/apple-touch-icon-precomposed-152.png">
+<link rel="shortcut icon" href="//assets/gitbook/images/favicon.ico" type="image/x-icon">
+<script src="https://kit.fontawesome.com/172072993d.js" crossorigin="anonymous"></script>
+
+
+
+
+            <link rel="prev" href="/development/bdd/2014-09-25-bdd-mastermind-internal-design.html" />
+        
+
+        
+            <link rel="next" href="/development/bdd/tdd/2014-10-21-bdd-mastermind-view-preparation-to-make-the-ui-testable.html" />
+        
+    </head>
+    <body>
+        <div class="book"><div class="book-summary">
+    <script type="text/javascript">
+        // Fixes the page links scroll problem on both desktop and mobile browsers
+        function pageScrollToTop(element) {
+            // both mobile and non-mobile
+            $('div.body-inner').animate({scrollTop: 0});
+            $(element).parent().find('li>ul>li').removeClass('active');
+            return true;  // propagate
+        }
+        // Fixes the anchor links scroll problem on mobile browsers
+        function mobilePageScrollToAnchor(element) {
+            $(element).closest('li.chapter').find('ul>li').removeClass('active');
+            $(element).parent().addClass('active');
+            if ($(document).width() <= 1240) {
+                $('div.body-inner').animate({scrollTop: $($(element).attr('href')).get(0).offsetTop});
+            }
+            return true;
+        }
+    </script>
+
+    <nav role="navigation">
+        <div id="book-search-input" role="search">
+            <input type="text" placeholder="Type to search" />
+        </div>
+        <div id="book-search-input-link" role="search">
+            <a href="/assets/search.html">Click to Search</a>
+        </div>
+        <ul class="summary">
+            
+            <li class="chapter" data-level="1.1" data-path="">
+            
+                <a href="/" onclick="pageScrollToTop(this)">
+                    Guillem Efege
+                </a>
+            </li>
+
+            <li class="divider"></li>
+
+            
+                <!-- <p>pages</p> -->
+                
+                    
+
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/pages/2022-02-04-cv.html">
+                        
+                            <a href="/pages/2022-02-04-cv.html" onclick="pageScrollToTop(this)">
+                                CV Guillem Fernandez
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/pages/2022-02-05-contact.html">
+                        
+                            <a href="/pages/2022-02-05-contact.html" onclick="pageScrollToTop(this)">
+                                Contact me
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+
+                    
+                        <li class="divider"></li>
+                    
+                
+            
+                <!-- <p>posts</p> -->
+                
+                    
+
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/opinion/2016-09-18-what-is-the-tatus-of-bdd-in-swift.html">
+                        
+                            <a href="/opinion/2016-09-18-what-is-the-tatus-of-bdd-in-swift.html" onclick="pageScrollToTop(this)">
+                                What Is the Status of BDD in Swift
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/opinion/2016-09-16-and-now-what.html">
+                        
+                            <a href="/opinion/2016-09-16-and-now-what.html" onclick="pageScrollToTop(this)">
+                                And Now What?
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/tips'n'tricks/2015-01-23-mfmailcomposeviewcontroller-nightmare.html">
+                        
+                            <a href="/development/tips'n'tricks/2015-01-23-mfmailcomposeviewcontroller-nightmare.html" onclick="pageScrollToTop(this)">
+                                MFMailComposeViewController Nightmare
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/tips'n'tricks/2015-01-20-ios-7-and-ios-8-living-together.html">
+                        
+                            <a href="/development/tips'n'tricks/2015-01-20-ios-7-and-ios-8-living-together.html" onclick="pageScrollToTop(this)">
+                                iOS 7 and iOS 8 living together
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/bdd/tdd/2014-11-20-bdd-mastermind-adding-calabash-and-creating-our-first-tests.html">
+                        
+                            <a href="/development/bdd/tdd/2014-11-20-bdd-mastermind-adding-calabash-and-creating-our-first-tests.html" onclick="pageScrollToTop(this)">
+                                BDD - Mastermind : Adding calabash and creating our first tests
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/bdd/tdd/2014-11-10-bdd-mastermind-view-preparation.html">
+                        
+                            <a href="/development/bdd/tdd/2014-11-10-bdd-mastermind-view-preparation.html" onclick="pageScrollToTop(this)">
+                                BDD - Mastermind : View preparation
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/bdd/tdd/2014-10-21-bdd-mastermind-view-preparation-to-make-the-ui-testable.html">
+                        
+                            <a href="/development/bdd/tdd/2014-10-21-bdd-mastermind-view-preparation-to-make-the-ui-testable.html" onclick="pageScrollToTop(this)">
+                                BDD - Mastermind : View preparation to make the UI testable
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter active" data-level="1.2" data-path="/development/bdd/tdd/2014-09-29-bdd-mastermind-tdd-in-the-model.html">
+                        
+                            <a href="/development/bdd/tdd/2014-09-29-bdd-mastermind-tdd-in-the-model.html" onclick="pageScrollToTop(this)">
+                                BDD - Mastermind : TDD in the model
+                            </a>
+                            
+                                
+                                    
+
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/bdd/2014-09-25-bdd-mastermind-internal-design.html">
+                        
+                            <a href="/development/bdd/2014-09-25-bdd-mastermind-internal-design.html" onclick="pageScrollToTop(this)">
+                                BDD - Mastermind : Internal design
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/development/extra/bdd/2014-08-20-bdd-from-the-idea-to-the-app-2.html">
+                        
+                            <a href="/development/extra/bdd/2014-08-20-bdd-from-the-idea-to-the-app-2.html" onclick="pageScrollToTop(this)">
+                                BDD: From the idea to the App 2
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+                        
+                        <li class="chapter" data-level="1.1" data-path="/productivity/o'reilly/video/2014-07-02-oreilly-media-videos.html">
+                        
+                            <a href="/productivity/o'reilly/video/2014-07-02-oreilly-media-videos.html" onclick="pageScrollToTop(this)">
+                                O&#39;Reilly Media Videos
+                            </a>
+                            
+                                
+                            
+                        </li>
+                    
+
+                    
+                        <li class="divider"></li>
+                    
+                
+            
+        </ul>
+    </nav>
+</div>
+<div class="book-body">
+                <div class="book-header" role="navigation">
+                    <!-- Title -->
+                    <h1>
+                        <i class="fa fa-circle-o-notch fa-spin"></i>
+                        
+                            <a href="." >BDD - Mastermind : TDD in the model</a>
+                        
+                    </h1>
+                </div>
+
+                <div class="body-inner"><div class="page-wrapper" tabindex="-1" role="main">
+    
+
+    <div class="page-inner">
+        <div id="book-search-results">
+            <div class="search-noresults">
+                <section class="normal markdown-section">
+                    
+                        <h1 id="/development/bdd/tdd/bdd-mastermind-tdd-in-the-model">BDD - Mastermind : TDD in the model</h1>
+                    
+
+                    <p>This is the third post to create an application using BDD and TDD in iOS. If you missed the previous post, my recommendation is that you read it first <a href="/blog/2014/08/20/bdd-from-the-idea-to-the-app-2/" title="BDD: From the Idea to the App 2">here</a>.</p>
+
+<p>It’s time to get your hands dirty. To make it really easy I’ve decided to tag each relevant commit with step numbers so you can follow step by step the process. I recommend you to code your own version, but if at some point you are lost, just checkout the step where you got lost and we’ll be synchronized again.</p>
+
+<p>First thing to do is create your project and have it ready to run. You can create a new project or checkout <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_1" title="MasterMind-BDD Step1">this commit</a> or just checkout from terminal by :</p>
+
+<figure class="highlight"><pre><code class="language-sh" data-lang="sh">git clone git@github.com:guillemf/Mastermind-BDD.git 
+git tag <span class="nt">-l</span>
+git checkout tags/Step_1.</code></pre></figure>
+
+<!-- more -->
+<p>As you might now the process of TDD is basically writing a test, seeing how it fails, implement the solution and run again the test until it passes. I’m not going to go deep in what is TDD as there are many webs that explain very well how to do TDD like <a href="http://qualitycoding.org">Quality Coding</a> specially the screencast series starting with <a href="http://qualitycoding.org/objective-c-tdd/">Intro to Objectve-C TDD</a>.</p>
+
+<p>So, assuming you know what is TDD and how to do it, let’s start our process.</p>
+
+<p>What I do is take each requirement and try to dissect it in all the possible unitary tests I can do covering all possibilities. So let’s start on the first one.</p>
+
+<ul>
+  <li>Every time we start a new game, the model has to create a new secret combination.</li>
+</ul>
+
+<p>The first test to write is to be sure that right from the beginning there is something in combination. I write my first test and, following the method, I get my first error.</p>
+
+<p><img src="https://farm3.staticflickr.com/2941/15217066667_a2f04c500c_o.png" alt="First Failing Test" title="Test 1 Fail" /></p>
+
+<p>So I need to fix that situation, first by implementing MMModel class.</p>
+
+<p>With this implementation</p>
+
+<figure class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@interface</span> <span class="nc">MMModel</span> <span class="p">:</span> <span class="nc">NSObject</span>
+
+<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">strong</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">combination</span><span class="p">;</span>
+
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="nc">MMModel</span>
+
+
+<span class="k">-</span> <span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="n">init</span><span class="p">{</span>
+    
+    <span class="n">self</span> <span class="o">=</span> <span class="p">[</span><span class="n">super</span> <span class="nf">init</span><span class="p">];</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">combination</span> <span class="o">=</span> <span class="s">@""</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">self</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span></code></pre></figure>
+
+<p>The tests passes, things seem to go in the right way. Let’s face the second test. As it says every time we <strong>start</strong> a new game, a <strong>new combination</strong>, the next test seems obvious that it has to be something like:</p>
+
+<figure class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testModelOnStartShouldGenerateANewCombination</span> <span class="p">{</span>
+    
+    <span class="n">MMModel</span> <span class="o">*</span><span class="n">model</span> <span class="o">=</span> <span class="p">[[</span><span class="n">MMModel</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">originalCombination</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">combination</span><span class="p">;</span>
+    
+    <span class="p">[</span><span class="n">model</span> <span class="nf">start</span><span class="p">];</span>
+    
+    <span class="n">XCTAssertNotEqual</span><span class="p">(</span><span class="n">originalCombination</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">combination</span><span class="p">,</span> <span class="s">@"After start the combination has to be different from the previous one"</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>But that only covers one iteration, and unit tests has to be <em>independent</em> on the contexts, that mean a random number of times, so let’s introduce a random number to repeat starts.</p>
+
+<figure class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testModelOnStartShouldGenerateANewCombination</span> <span class="p">{</span>
+    
+    <span class="n">MMModel</span> <span class="o">*</span><span class="n">model</span> <span class="o">=</span> <span class="p">[[</span><span class="n">MMModel</span> <span class="nf">alloc</span><span class="p">]</span> <span class="nf">init</span><span class="p">];</span>
+    
+    <span class="kt">int</span> <span class="n">lowerBound</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">upperBound</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    
+    <span class="kt">int</span> <span class="n">rndValue</span> <span class="o">=</span> <span class="n">lowerBound</span> <span class="o">+</span> <span class="n">arc4random</span><span class="p">()</span> <span class="o">%</span> <span class="p">(</span><span class="n">upperBound</span> <span class="o">-</span> <span class="n">lowerBound</span><span class="p">);</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">n</span><span class="o">&lt;=</span><span class="n">rndValue</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        
+        <span class="n">NSString</span> <span class="o">*</span><span class="n">originalCombination</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">combination</span><span class="p">;</span>
+        <span class="p">[</span><span class="n">model</span> <span class="nf">start</span><span class="p">];</span>
+        <span class="n">XCTAssertNotEqual</span><span class="p">(</span><span class="n">originalCombination</span><span class="p">,</span> <span class="n">model</span><span class="p">.</span><span class="n">combination</span><span class="p">,</span> <span class="s">@"After start the combination has to be different from the previous one"</span><span class="p">);</span>
+
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>And this implementation</p>
+
+<figure class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">start</span> <span class="p">{</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">combination</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="nf">stringWithFormat</span><span class="p">:</span><span class="s">@"%d"</span><span class="p">,</span> <span class="n">arc4random</span><span class="p">()];</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>Makes the test pass. Yes, you might think “<em>Hey, that’s a trick. This is not a valid combination!!</em>” and you’d be right, but don’t forget TDD says “<strong>Write the minimum amount of code that makes the test pass</strong>”, and that’s what we are doing. Later on we’ll find that we need to change this implementation to pass other tests, but we’ll be sure we are not breaking the rules with the following and more complex tests we need to pass.</p>
+
+<p>It’s time for some refactoring and we’ll move the declaration of model to the setup method. As we need a new combination from the start, we’ll also move a call to start in the model inside the creation. We run the tests by Cmd+U and see all still works.</p>
+
+<p>Next requirement is :</p>
+
+<ul>
+  <li>The secret combination is four numbers long.</li>
+</ul>
+
+<p>So the tests are :</p>
+
+<figure class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testModelSecretCombinationShouldContainFourNumbers</span>
+<span class="p">{</span>
+    <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="n">model</span><span class="p">.</span><span class="n">combination</span><span class="p">.</span><span class="n">length</span><span class="p">,</span> <span class="mi">4ul</span><span class="p">,</span> <span class="s">@"Secrect combination length should be four"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testModelSecretCombinationIsNumeric</span>
+<span class="p">{</span>
+    <span class="n">NSCharacterSet</span><span class="o">*</span> <span class="n">nonNumbers</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSCharacterSet</span> <span class="nf">decimalDigitCharacterSet</span><span class="p">]</span> <span class="nf">invertedSet</span><span class="p">];</span>
+    <span class="n">NSRange</span> <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">.</span><span class="n">combination</span> <span class="nf">rangeOfCharacterFromSet</span><span class="p">:</span> <span class="n">nonNumbers</span><span class="p">];</span>
+    
+    <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="n">NSNotFound</span><span class="p">,</span> <span class="s">@"All digits should be numeric"</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>And here we have our first need of re-coding a part of the source to be able to pass those two tests. Try to do it by yourself and if you can’t see how to do it, you can go and checkout <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_2" title="MasterMind-BDD Step2">this commit</a>.</p>
+
+<p>With the next requirement, things start becoming complicated and won’t be so easy in terms of coding.</p>
+
+<ul>
+  <li>The numbers in the combination are between 1 and 4.</li>
+</ul>
+
+<p>Let’s write the test to fail.</p>
+
+<figure class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">testModelSecretCombinationAllDigitsAreBetween1and4</span>
+<span class="p">{</span>
+    <span class="n">NSCharacterSet</span><span class="o">*</span> <span class="n">non1234</span> <span class="o">=</span> <span class="p">[[</span><span class="n">NSCharacterSet</span> <span class="nf">characterSetWithCharactersInString</span><span class="p">:</span><span class="s">@"1234"</span><span class="p">]</span> <span class="nf">invertedSet</span><span class="p">];</span>
+    <span class="n">NSRange</span> <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="n">model</span><span class="p">.</span><span class="n">combination</span> <span class="nf">rangeOfCharacterFromSet</span><span class="p">:</span> <span class="n">non1234</span><span class="p">];</span>
+    
+    <span class="n">XCTAssertEqual</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">location</span><span class="p">,</span> <span class="n">NSNotFound</span><span class="p">,</span> <span class="s">@"All digits should be between 1 and 4"</span><span class="p">);</span>
+
+<span class="p">}</span></code></pre></figure>
+
+<p>Again all the challenge is inside <em>start</em> method in <em>MMModel.m</em>. It is a good practice to try to implement it by yourself. Once you are done, checkout <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_3" title="MasterMind-BDD Step3">Step 3</a> and you can compare your solution to mine and see how beautiful it is to see there are many ways to find a solution for the same problem. And remember to write <strong>the less possible code</strong> to pass the tests.</p>
+
+<p>To not make this post eternal, I will just comment next requirement:</p>
+
+<ul>
+  <li>The numbers in the combination can be repeated.</li>
+</ul>
+
+<p>In this case we can’t write a test, at least in an easy way, about how to allow something. If opposite to this requirement it would be “<em>The numbers in the combination can be repeated</em>” it would be easy to traverse the digits and ensure there is no repetition, but as long as this is not a restriction, I won’t write a test for it. As usual, you can have a different opinion and write a test to verify it, I encourage you to do it and paste a comment explaining why you took that decision.</p>
+
+<p>You’ll find the full code for this post in <a href="https://github.com/guillemf/Mastermind-BDD/tree/Step_4" title="MasterMind-BDD Step4">Step 4</a>.</p>
+
+<p>In the next post <a href="/blog/2014/10/21/bdd-mastermind-view-preparation-to-make-the-ui-testable/" title="BDD - Mastermind : Preparation to make the UI Testable">BDD - Mastermind : Preparation to make the UI Testable</a> we’ll start preparing the views to implement it with BDD.</p>
+
+<p>If you like it, please share! And leave me a comment if you have some time, I’d love to know this is helping someone ;)</p>
+
+</section>
+            </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div></div>
+    </div>
+</div>
+
+<!-- introduce mathjax support -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [ ['$', '$'], ['\\(', '\\)'] ]
+  },
+  svg: {
+    fontCache: 'global'
+  }
+};
+</script>
+<script
+  type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+
+
+<!-- introduce per-page mermaid support -->
+
+
+<!-- introduce mathjax support -->
+<script>
+    function fixes_chrome_anchors() {
+        let chrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+        if (window.location.hash && chrome) {
+            setTimeout(function () {
+                var hash = window.location.hash;
+                window.location.hash = "";
+                window.location.hash = hash;
+            }, 300);
+        }
+    }
+
+    if (document.readyState === "loading") {
+        // Loading hasn't finished yet
+        document.addEventListener("DOMContentLoaded", fixes_chrome_anchors);
+    } else {
+        // `DOMContentLoaded` has already fired
+        fixes_chrome_anchors();
+    }
+</script>
+
+
+                        <a href="/development/bdd/2014-09-25-bdd-mastermind-internal-design.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: BDD - Mastermind : Internal design">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                    
+
+                    
+                        <a href="/development/bdd/tdd/2014-10-21-bdd-mastermind-view-preparation-to-make-the-ui-testable.html" class="navigation navigation-next navigation-unique" aria-label="Next page: BDD - Mastermind : View preparation to make the UI testable">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    
+                </div>
+            </div>
+
+            <script>
+            var gitbook = gitbook || [];
+            gitbook.push(function() {
+                gitbook.page.hasChanged({
+    "page": {
+        "title": "Introduction",
+        "level": "1.1",
+        "depth": 1,
+        
+        "next": {
+            "title": "BDD - Mastermind : View preparation to make the UI testable",
+            "level": "1.2",
+            "depth": 1,
+            "path": "_posts/2014-10-21-bdd-mastermind-view-preparation-to-make-the-ui-testable.markdown",
+            "ref": "_posts/2014-10-21-bdd-mastermind-view-preparation-to-make-the-ui-testable.markdown",
+            "articles": []
+        },
+        
+        "dir": "ltr"
+    },    "config": {
+        "plugins": ["fontsettings", "highlight", "livereload", "lunr", "search", "sharing", "theme-default", "livereload"],
+        "styles": {
+            "ebook": "styles/ebook.css",
+            "epub": "styles/epub.css",
+            "mobi": "styles/mobi.css",
+            "pdf": "styles/pdf.css",
+            "print": "styles/print.css",
+            "website": "styles/website.css"
+        },
+        "pluginsConfig": {
+            "expandable-chapter-small2": {
+                "articlesExpand": true,
+            },
+            "fontsettings": {
+                "family": "sans",
+                "size": 2,
+                "theme": "white"
+            },
+            "highlight": {},
+            "livereload": {},
+            "lunr": {
+                "ignoreSpecialCharacters": false,
+                "maxIndexSize": 1000000
+            },
+            "search": {},            "sharing": {
+                "facebook": true,
+
+                "google": false,
+
+                "github": true,
+              
+                "github_link": "https://github.com/guillemf",
+              
+
+                "telegram": false,
+                "telegram_link": "https://t.me",
+
+                "instapaper": false,
+
+                "twitter": true,
+              
+                "twitter_link": "https://twitter.com/guillemfg",
+              
+
+                "vk": false,
+
+                "weibo": false,
+
+                "all": ["facebook", "google", "twitter", "weibo", "instapaper", "github", "telegram"]
+            },
+"theme-default": {
+                "showLevel": false,
+                "styles": {
+                    "ebook": "styles/ebook.css",
+                    "epub": "styles/epub.css",
+                    "mobi": "styles/mobi.css",
+                    "pdf": "styles/pdf.css",
+                    "print": "styles/print.css",
+                    "website": "styles/website.css"
+                }
+            },
+        },
+        "theme": "default",
+        "author": "Tao He",
+        "pdf": {
+            "pageNumbers": true,
+            "fontSize": 12,
+            "fontFamily": "Arial",
+            "paperSize": "a4",
+            "chapterMark": "pagebreak",
+            "pageBreaksBefore": "/",
+            "margin": {
+                "right": 62,
+                "left": 62,
+                "top": 56,
+                "bottom": 56
+            }
+        },
+        "structure": {
+            "langs": "LANGS.md",
+            "readme": "README.md",
+        },
+        "variables": {},
+        "title": "Guillem Efege",
+        "language": "en",
+        "gitbook": "*"
+    },
+    "file": {
+        "path": "_posts/2014-09-29-bdd-mastermind-tdd-in-the-model.markdown",
+        "mtime": "2014-09-29 17:06:51 +0200",
+        "type": "markdown"
+    },
+    "gitbook": {
+        "version": "3.2.3",
+        "time": "2024-05-24 20:52:23 +0200"
+    },
+    "basePath": "",
+    "book": {
+        "language": ""
+    }
+});
+            });
+            </script>
+        </div><script src="/assets/gitbook/gitbook.js"></script>
+<script src="/assets/gitbook/theme.js"></script>
+
+<script src="/assets/gitbook/gitbook-plugin-back-to-top-button/plugin.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-copy-code-button/toggle.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-expandable-chapters-small2/expandable-chapters-small.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-search-pro/jquery.mark.min.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-search-pro/search.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-sharing/buttons.js"></script>
+<script src="/assets/gitbook/gitbook-plugin-splitter/splitter.js"></script>
+
+<!--
+<script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+<script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+<script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+<script src="../gitbook/gitbook-plugin-search/search.js"></script>
+-->
+
+</body>
+</html>

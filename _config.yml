@@ -1,0 +1,69 @@
+# Configurations 
+
+title:      Guillem Efege 
+longtitle:  Guillem Fernandez's Blog
+author:     Guillem Efegé
+email:      hello@guillem.cat
+description: >
+  Guillem Fernandez's professional web site
+  From Developer for Developers.
+  About Soft Skills and Hard Skills
+
+version:          1.0
+gitbook_version:  3.2.3
+
+baseurl:  "" 
+url:      "https://guillemf.github.io"
+rss:      RSS
+
+remote_theme: sighingnow/jekyll-gitbook
+
+toc:
+    enabled: true
+    h_min: 1
+    h_max: 3
+
+favicon_path:     /assets/gitbook/images/favicon.ico
+
+# markdown render engine.
+markdown:         kramdown
+kramdown:
+  auto_ids:               true
+  input:                  GFM
+  math_engine:            mathjax
+  smart_quotes:           lsquo,rsquo,ldquo,rdquo
+  toc_levels:             1..6
+  syntax_highlighter:     rouge
+  syntax_highlighter_opts:
+    guess_lang:           true
+
+syntax_highlighter_style: colorful
+
+markdown_ext:             markdown,mkdown,mkdn,mkd,md
+
+# Permalinks
+permalink:                /:categories/:year-:month-:day-:title:output_ext
+
+exclude:
+  - _drafts
+
+collections:
+  pages:
+    output: true
+    sort_by: date ASC
+    permalink: /:collection/:year-:month-:day-:title:output_ext
+
+page_width: 800px
+
+destination:      ./_site
+incremental:      false
+regenerate:       true
+
+plugins:
+  - jekyll-feed
+  - jekyll-readme-index
+  - jemoji
+
+
+twitter_username: guillemfg
+github_username:  guillemf
