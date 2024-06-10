@@ -24,16 +24,15 @@ Experience is a good thing that comes with the years, if not the best. You learn
 
 **I want to join** a company that values money as one of the essential parts of the business but not the only important part.
 
-I've been managing, mentoring, and helping people for many years, and I never hesitated about starting from a lower position to demonstrate I can bring great things to the team. But this time, I know my time has come to give all I have inside to my new endeavor.
-
 <div style="display: flex;">
-    <div style="flex: 50%; padding: 5px">
+    <div style="flex: 75-0%; padding: 0px">
+    I've been managing, mentoring, and helping people for many years, and I never hesitated about starting from a lower position to demonstrate I can bring great things to the team. But this time, I know my time has come to give all I have inside to my new endeavor.
+
     Thanks to this time to reflect, my first action will be finishing and publishing my second book, "Booster Skills". This book is about those things you can do to make your daily work much more manageable, how to better relate to your teammates, and how to promote your job to get where you want to get; stay tuned.
     </div>
-    <div style="flex: 50%; padding: 5px">
-     <img source="{{site.baseurl}}/assets/gitbook/images/boosterskills.png" style="width: 150px; height: 300px;"/>
-
-     ![Image]({{"/assets/gitbook/images/boosterskills.png", | relative_url }})
+    <div style="flex: 30%; padding-left
+    : 15px">
+     <img src="http://pro.guillem.cat/assets/gitbook/images/boosterskills.png" style="width: 200px; height: 300px;"/>
     </div>
 </div>
 
