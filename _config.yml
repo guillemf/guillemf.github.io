@@ -23,7 +23,7 @@ toc:
     h_min: 1
     h_max: 3
 
-favicon_path:     /assets/gitbook/images/favicon.ico
+favicon_path:     assets/gitbook/images/favicon.ico
 
 # markdown render engine.
 markdown:         kramdown
