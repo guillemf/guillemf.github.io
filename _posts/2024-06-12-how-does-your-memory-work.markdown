@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Are you able to do multitasking?"
+title: "How does your memory work?"
 date: 2024.06.11 10:00:00 +0200
 comments: false
 categories: Productivity
