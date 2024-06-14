@@ -28,7 +28,7 @@ Experience is a good thing that comes with the years, if not the best. You learn
     <div style="flex: 75-0%; padding: 0px">
     I've been managing, mentoring, and helping people for many years, and I never hesitated about starting from a lower position to demonstrate I can bring great things to the team. But this time, I know my time has come to give all I have inside to my new endeavor.
 
-    Thanks to this time to reflect, my first action will be finishing and publishing my second book, "Booster Skills". This book is about those things you can do to make your daily work much more manageable, how to better relate to your teammates, and how to promote your job to get where you want to get; stay tuned.
+    Thanks to this time to reflect, my first action will be finishing and publishing my second book, "Booster Skills." This book is about those things you can do to make your daily work much more manageable, how to better relate to your teammates, and how to promote your job to get where you want to get; stay tuned.
     </div>
     <div style="flex: 30%; padding-left
     : 15px">
