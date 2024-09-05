@@ -3,3 +3,4 @@ _site
 .vscode
 _site/feed.xml
 .jekyll-metadata
+.DS_Store
