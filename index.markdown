@@ -16,15 +16,15 @@ Hi, I' Guillem Efege
 <i class="fa-solid fa-book-open"></i>&nbsp;&nbsp;Writting a book about Soft Skills<br>
 <i class="fa-solid fa-laptop-code"></i>&nbsp;&nbsp;I love eXtreme Programming<br>
 
-### 2024 Ressolutions - Updated 23.05.2024
+### 2024 Ressolutions - Updated 26.06.2024
 ---
 
 <i class="fa-regular fa-square-check"></i> Read three books in April (3/3)<br>
-<i class="fa-regular fa-square"></i> Read three books in May (2/3)<br>
-<i class="fa-regular fa-square"></i> Read three books in June (0/3)<br>
+<i class="fa-regular fa-square-check"></i> Read three books in May (3/3)<br>
+<i class="fa-regular fa-square"></i> Read three books in June (2/3)<br>
 <i class="fa-regular fa-square"></i> Publish the first version of Booster Skills by the end of June<br>
 <i class="fa-regular fa-square"></i> Start a new YouTube channel (in the process)<br>
-<i class="fa-regular fa-square"></i> Get back to things<br>
+<i class="fa-regular fa-square-check"></i> Get back to things<br>
 <i class="fa-regular fa-square-check"></i> Update my blog, Theme, and content<br>
 
 ### Connect with me:

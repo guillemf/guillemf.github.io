@@ -15,8 +15,8 @@ Why do you remember some things quickly while others are hard to remember?
 Imagine your first day at a new job, new office, new people.
 After you sit at your new desk, the person from the people's department will come to you and give you a guided tour.
 
-You start walking, and she introduces you to, let's say, 30 new people during your tour, plus three or four more that you meet at the cafeteria.
-Now imagine that at the end of the day, someone comes to you with a list of 200 names and says, could you please mark which of those names you can remember that you met today? You can mark less than five, the ones you've spent more time on or the last ones you've met. 
+You start walking, and she introduces you to, let's say 30 new people during your tour, plus three or four more that you meet at the cafeteria.
+Now imagine that at the end of the day, someone comes to you with a list of 200 names and says, could you please mark which of those names you can remember that you met today? You can mark less than five, the ones you've spent more time on or the last ones you've met.
 
 But now imagine another situation.
 

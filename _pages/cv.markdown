@@ -7,7 +7,7 @@ layout: post
 cover: /assets/img/guillem.png
 ---
 
-[Download it <i class="fa-regular fa-cloud-arrow-down"></i>][curriculum]
+[Download it <i class="fa-solid fa-cloud-arrow-down"></i> ][curriculum]
 
 ## Engineering Director
 
