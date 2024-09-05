@@ -14,8 +14,6 @@ Thinking about why we follow our leaders, I came to the following schema.
 
 People usually quit their jobs because of bad leaders, not because of a bad company. I will analyze why we quit in another post, but in this post, let's discuss why we follow our leaders.
 
-Thinking about why we follow our leaders, I came to the following schema.
-
 The primary reasons I came with are fear and benefit. These are two basic instincts. Either you are submitted and controlled, or you expect to get something from that leader.
 
 When fear is the primary driver, the fundamental reasons are:
