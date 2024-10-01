@@ -21,9 +21,11 @@ Hi, I' Guillem Efege
 
 <i class="fa-regular fa-square-check"></i> Read three books in April (3/3)<br>
 <i class="fa-regular fa-square-check"></i> Read three books in May (3/3)<br>
-<i class="fa-regular fa-square"></i> Read three books in June (2/3)<br>
+<i class="fa-regular fa-square-check"></i> Read three books in June (3/3)<br>
+<i class="fa-regular fa-square-check"></i> Read three books in July (3/3)<br>
+<i class="fa-regular fa-square-check"></i> Read three books in Seppember (3/3)<br>
 <i class="fa-regular fa-square"></i> Publish the first version of Booster Skills by the end of June<br>
-<i class="fa-regular fa-square"></i> Start a new YouTube channel (in the process)<br>
+<i class="fa-regular fa-square-check"></i> Start a new YouTube channel<br>
 <i class="fa-regular fa-square-check"></i> Get back to things<br>
 <i class="fa-regular fa-square-check"></i> Update my blog, Theme, and content<br>
 
