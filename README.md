@@ -10,11 +10,12 @@
 
 - [x] Read three books in April (3/3)
 - [ ] Publish the first version of Booster Skills by the end of June
-- [ ] Read three books in May (1/3)
-- [ ] Read three books in June (3/3)
-- [ ] Start a new YouTube channel (in the process)
-- [ ] Get back to things
-- [ ] Update my blog, Theme, and content
+- [x] Read three books in May (3/3)
+- [x] Read three books in June (3/3)
+- [x] Read three books in July (3/3)
+- [x] Start a new YouTube channel (in the process)
+- [ ] ~~Get back to things~~
+- [x] Update my blog, Theme, and content
 
 ### Connect with me:
 
