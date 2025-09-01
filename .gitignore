@@ -4,3 +4,4 @@ _site
 _site/feed.xml
 .jekyll-metadata
 .DS_Store
+assets/.DS_Store
